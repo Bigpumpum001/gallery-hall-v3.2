@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Auction</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Arimo font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+    <!-- boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <!-- vtfont -->
+   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+    
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Limelight&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+        * {
+            font-family: "Arimo", sans-serif;
+            font-weight: 600;
+        }
+
+        .border-black {
+            border: 1px solid black;
+        }
+
+        .navbar-brand p {
+            transform: translateY(20%);
+        }
+
+        .brand-search-log {
+            height: 12vh;
+        }
+
+        .logo-left img {
+            /* width: 15%; */
+            max-width: 5rem;
+            margin-left: 1rem;
+            width: 100%;
+        }
+
+        .margin-right-3rem {
+            margin-right: 3rem;
+        }
+
+        .background-header {
+            height: 35vh;
+            border-radius: 2rem;
+        }
+
+        .background-header img {
+            width: 100%;
+            height: 40rem;
+        }
+
+        .bg-image {
+            background-image: url('news.png');
+            background-size: cover;
+            /* ปรับภาพให้ครอบคลุมพื้นที่ทั้งหมด */
+            background-position: center;
+            /* กำหนดตำแหน่งของภาพ */
+            background-repeat: no-repeat;
+            /* ป้องกันการซ้ำของภาพ */
+        }
+
+        .background-header-container {
+            padding: 2rem 5rem 2rem 5rem;
+        }
+
+        .bg-gray {
+            background-color: #F0F0F0;
+        }
+
+        .bg-search {
+            background-color: #D9D9D9;
+            border: 0;
+
+        }
+
+        .logout-button {
+            white-space: nowrap;
+            width: 7rem;
+        }
+
+        .last-container {
+            min-height: 100vh;
+            /* min-width: 100vh; */
+        
+        }
+
+        .back-btn {
+            height: 2.5rem;
+        }
+        .bg-let-us {
+            background-color: #E5E5E5;
+        }
+        .border-radius-dot7rem{
+            border-radius: 0.7rem;
+        }
+        .logo-none{
+            display: none;
+        }
+        .nav-ml{
+            margin-left: 4rem;
+        }
+        .monitor {
+            border: 2px solid #FF5A1A;
+            border-radius: 1rem;
+            background-color: #f8d7da;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.3);
+        }
+        .monitor p {
+            font-family: "VT323", monospace;
+            /* font-size: 100px; */
+            position: relative;
+            display: inline-block;
+            animation: move 10s infinite linear;
+            color: #004085;
+            font-size: 3rem;
+        }
+        .display-to-flex{
+            display: flex;
+        }
+        .nav-none-to-block{
+            display:none;
+        }
+
+        @keyframes move {
+            0% {
+                left: 100px;
+            }
+
+            50% {
+                left: -100px;
+            }
+            100% {
+                left: 100px;
+            }
+        }
+
+        @media(max-width:991px) {
+                .logo-none {
+                    display: flex;
+                }
+                .back-btn {
+                    top: 0.5rem; /* Adjust positioning for smaller screens */
+                    left: 0.5 rem;
+                    right:10%;
+                }
+
+                .nav-ml {
+                    margin-left: 0rem;
+                }
+
+                .align-items-center .fw-bold {
+                    white-space: nowrap;
+                }
+                .logout-none{
+                    display: none;
+                }
+                .nav-none-to-block{
+                display:block;
+
+                
+            }
+        }
+
+        @media(max-width:575px){
+        .display-none{
+            display: none;
+        }
+        }
+        .nav-item a , .hamberger-log-out{
+                font-size: 1.2rem;
+            }
+        
+        .star {
+            width: 6vmin;
+            height: 6vmin;
+            background-color: gold;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            position: relative;
+            transform: translateX(100em) rotate(0deg);
+            animation: starMove 4s ease-out infinite;
+        }
+        @keyframes starMove {
+        0% {
+            transform: translateX(30em) rotate(0deg);
+        }
+        100% {
+            transform: translateX(-35em) rotate(360deg);
+        }
+        }
+                .brand-search-log {
+            /* min-height: 100vh; */
+            display: grid;
+            place-items: center;
+
+            --bkg: #5eb3fd;
+            --white: white;
+
+            background-color: var(--white);
+            background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+        }
+                .ticon {
+            /* width: 100%; */
+            height: 100%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .title {
+            position: absolute;
+            /* top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); */
+        }
+        .title h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            font-family: "Limelight", sans-serif;
+            color: black;
+        }
+        @media(max-width:510px) {
+            .title h1 {
+                font-size: 1.9rem;
+            }
+        }
+            @media(max-width:455px){
+                .title h1 {
+                    font-size: 1.5rem;
+                }
+            }
+            @media(max-width:349px){
+                .title h1 {
+                    font-size: 1.2rem;
+                }
+            }
+            @media(min-width:992px) {
+            /* pc */
+            .bg-pc-black {
+                background-color: black;
+            }
+
+            .text-pc-white {
+                color: white;
+            }
+
+            .text-pc-white:hover
+            {
+                color: rgb(183 183 183);
+            }
+            .navbar-nav .nav-link.active{
+                color: rgb(183 183 183);
+            }
+
+
+        }
+
+        @media(max-width:991px) {
+        /* mobile */
+            .bg-mobile-white {
+                background-color: white;
+            }
+        }
+    </style>
+    <!-- boostrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Firebase Libraries -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+    
+        const firebaseConfig = {
+        apiKey: "AIzaSyBHqagE_76AF0f8bRg-9Mx_QF0GtEaTya8",
+        authDomain: "gho-project.firebaseapp.com",
+        projectId: "gho-project",
+        storageBucket: "gho-project.firebasestorage.app",
+        messagingSenderId: "217715167340",
+        appId: "1:217715167340:web:c68f10020c6c33d476c849"
+        };
+            
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function submitAuction(event) {
+            event.preventDefault(); // Prevent the form from reloading the page
+    
+            const artName = document.getElementById("artName").value;
+            const artistName = document.getElementById("artistName").value;
+            const description = document.getElementById("description").value;
+            const artType = document.getElementById("artType").value;
+            const startingPrice = document.getElementById("startingPrice").value;
+            const minBid = document.getElementById("minBid").value;
+            const hours = document.getElementById("hours").value;
+            const minutes = document.getElementById("minutes").value;
+            const seconds = document.getElementById("seconds").value;
+            const artImageUrl = document.getElementById("artImageUrl").value;
+    
+            // Validate if the user has entered an image URL
+            if (!artImageUrl || !isValidUrl(artImageUrl)) {
+                alert("Please enter a valid image URL.");
+                return;
+            }
+            
+            if (parseFloat(startingPrice) < 0 || parseFloat(minBid) < 0) {
+                alert("Starting Price and Minimum Bid cannot be negative values.");
+                return;
+            }
+            
+            // Get the logged-in user email from localStorage
+            const userEmail = localStorage.getItem("loggedInEmail");
+            if (!userEmail) {
+                alert("No logged-in user.");
+                window.location.href = "login.html"; // Redirect to login if no user is logged in
+                return;
+            }
+    
+            try {
+                // Add the auction data to Firestore and generate a document with an auto-generated ID
+                const docRef = await addDoc(collection(db, "Auction"), {
+                    artName: artName,
+                    artistName: artistName,
+                    description: description,
+                    artType: artType,
+                    startingPrice: parseFloat(startingPrice),
+                    minBid: parseFloat(minBid),
+                    auctionDuration: {
+                        hours: parseInt(hours),
+                        minutes: parseInt(minutes),
+                        seconds: parseInt(seconds)
+                    },
+                    artImageUrl: artImageUrl, // Save the image URL
+                    createdBy: userEmail, // Save the user email with the auction
+                    createdAt: new Date()
+                });
+    
+                // Use the document ID as the auctionID
+                const auctionID = docRef.id;
+    
+                // Update the document with the auctionID field
+                await setDoc(doc(db, "Auction", auctionID), {
+                    auctionID: auctionID
+                }, { merge: true }); // Merging to add auctionID without overwriting
+    
+                alert(`Auction added successfully!`);
+                window.location.href = "home.html"; // Redirect to profile page after successful submission
+            } catch (error) {
+                console.error("Error adding auction: ", error);
+                alert("Failed to add auction. Please try again.");
+            }
+        }
+    
+        // Helper function to validate the image URL
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Format number with thousand separators
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Remove commas before submitting
+        function unformatNumber(formattedNumber) {
+            return formattedNumber.replace(/,/g, '');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const startingPriceInput = document.getElementById("startingPrice");
+            const minBidInput = document.getElementById("minBid");
+            
+            // Format numbers on input
+            function handleNumberInput(event) {
+                const input = event.target;
+                const cursorPosition = input.selectionStart;
+                const unformattedValue = unformatNumber(input.value);
+                
+                // Only proceed if it's a valid number
+                if (!isNaN(unformattedValue)) {
+                    const formattedValue = formatNumber(unformattedValue);
+                    input.value = formattedValue;
+                    
+                    // Adjust cursor position after formatting
+                    const addedCommas = formattedValue.length - unformattedValue.length;
+                    const newPosition = cursorPosition + addedCommas;
+                    input.setSelectionRange(newPosition, newPosition);
+                }
+            }
+            
+            // Add input event listeners
+            startingPriceInput.addEventListener("input", handleNumberInput);
+            minBidInput.addEventListener("input", handleNumberInput);
+            
+            // Modify the form submission
+            const auctionForm = document.getElementById("auction-form");
+            const originalSubmitHandler = auctionForm.onsubmit;
+            
+            auctionForm.onsubmit = (event) => {
+                // Remove commas before submitting
+                startingPriceInput.value = unformatNumber(startingPriceInput.value);
+                minBidInput.value = unformatNumber(minBidInput.value);
+                
+                // Call the original submit handler if it exists
+                if (originalSubmitHandler) {
+                    return originalSubmitHandler(event);
+                }
+            };
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const artNameInput = document.getElementById("artName");
+            const artistNameInput = document.getElementById("artistName");
+            const artNameWarning = document.getElementById("artNameWarning");
+            const artistNameWarning = document.getElementById("artistNameWarning");
+            const descriptionInput = document.getElementById('description');
+            const descriptionWarning = document.getElementById('descriptionWarning');
+
+            function checkInputLength(input, warning, maxLength) {
+                if (input.value.length > maxLength) {
+                    warning.style.display = "block";
+                } else {
+                    warning.style.display = "none";
+                }
+            }
+
+            artNameInput.addEventListener("input", () => {
+                checkInputLength(artNameInput, artNameWarning, 22);
+            });
+
+            artistNameInput.addEventListener("input", () => {
+                checkInputLength(artistNameInput, artistNameWarning, 27);
+            });
+
+            descriptionInput.addEventListener("input", () => {
+                checkInputLength(descriptionInput, descriptionWarning, 199);
+            });
+            
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const auctionForm = document.getElementById("auction-form");
+            auctionForm.addEventListener("submit", submitAuction);
+        });
+    </script>    
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            const loggedInEmail = localStorage.getItem("loggedInEmail");
+            if (!loggedInEmail) {
+                alert("No logged-in user."); 
+                window.location.href = 'index.html'; 
+            }
+         };
+    </script>
+    <nav class="navbar navbar-expand-lg navbar-light bg-mobile-white bg-pc-black fixed-top border-black p-0">
+        <div class="container-fluid">
+            <a class="navbar-brand logo-none" href="#">
+                <p>Gallery Hall Online</p>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse nav-ml" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3 ">
+                    <li class="nav-item ">
+                        <a class="nav-link text-pc-white" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-pc-white" href="add-auction.html">Add My Auction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-pc-white" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-pc-white" href="contact-us.html">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item logout-none">
+                        <a href="chat.html" class="btn btn-outline-secondary me-2 border-0">
+                            <i class='bx bxs-chat fs-3 text-white'></i>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-none-to-block pt-2">                        
+                        <a class="nav-link" href="chat.html">Chat</a>                  
+                </li>
+                    <li class="nav-item logo-none" onclick="logout()">   
+                            <p class="text-danger">Log out</p>                   
+                    </li>           
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <div class="container-fluid mt-5 brand-search-log pt-4 pb-3 d-flex justify-content-between align-items-center">
+      
+        <div class="col-2 logo-left ">
+            <img class=" img-fluid w-100" src="logo.png">
+        </div>
+        <div class="col-9 col-lg-6 d-flex  align-items-center justify-content-center  h-100 center ticon">
+            <div class="title">
+                <h1 class=" fw-bold "> Gallery Hall Online</h1>
+            </div>
+            <div class="star">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+        </div>
+        <div class=" col-2 display-to-flex justify-content-end  logout-none  ">
+            <button class="  btn btn-danger text-white btn-outline-danger  rounded-pill fs-5 fw-bold logout-button"
+                onclick="logout()">Log out</button>
+            <script>
+            function logout() {
+                console.log("Logout button clicked");
+                sessionStorage.removeItem("chatWithEmail");
+                localStorage.removeItem("loggedInEmail");
+                window.location.href = "login.html";
+            }
+            </script>         
+        </div>
+    </div>
+
+    <div class="container-fluid  pt-4 last-container bg-let-us">
+
+        <div class="row">
+            <div class="col-1 col-sm d-flex align-items-center">
+                <button class="border-1 rounded-pill fs-3 back-btn" onclick="goBack()">
+                    <i class='bx bx-arrow-back'></i>
+                </button>
+            </div>
+            <script>
+                function goBack() {
+                    window.history.back();
+                }
+            </script>
+            
+            <div class="col d-flex align-items-center justify-content-center">
+                <p class="fw-bold fs-2">Add Auction</p>
+            </div>
+            <div class="col display-none">
+                <p></p>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid mt-4 ">
+            <div class="container border-radius-dot7rem bg-white p-5">
+                <form id="auction-form">
+                    <div class="form-group">
+                        <label for="artName">Art Name</label>
+                        <input type="text" id="artName" class="form-control" maxlength="23" required>
+                        <small id="artNameWarning" class="text-danger" style="display: none;">Maximum 23 characters allowed.</small>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="artistName">Artist Name</label>
+                        <input type="text" id="artistName" class="form-control" maxlength="28" required>
+                        <small id="artistNameWarning" class="text-danger" style="display: none;">Maximum 28 characters allowed.</small>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="description">Art Description</label>
+                        <textarea id="description" class="form-control" rows="4" maxlength="200" required></textarea>
+                        <small id="descriptionWarning" class="text-danger" style="display: none;">Maximum 200 characters allowed.</small>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="artType">Art Type</label>
+                        <select id="artType" class="form-control" required>
+                            <option value="Abstract">Abstract</option>
+                            <option value="Painting">Painting</option>
+                            <option value="Sculpture">Sculpture</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="startingPrice">Starting Price - Cannot be negative value</label>
+                        <input type="text" id="startingPrice" class="form-control" pattern="[0-9,]*" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="minBid">Minimum Bid - Cannot be negative value</label>
+                        <input type="text" id="minBid" class="form-control" pattern="[0-9,]*" required>
+                    </div>
+                    <br>
+                    <label for="time-input">Auction period</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="hours" class="form-control" placeholder="Hours" min="0" value="0" required>
+                        <input type="number" id="minutes" class="form-control" placeholder="Minutes" min="0" max="59" value="0" required>
+                        <input type="number" id="seconds" class="form-control" placeholder="Seconds" min="0" max="59" value="59" required>
+                    </div>
+                    <br>
+    
+                    <div class="form-group">
+                        <label for="artImageUrl">Image URL</label>
+                        <a href="https://products.aspose.app/pdf/th/conversion/png-to-html" target="_blank">Website to convert File to URL</a>
+                        <input type="url" id="artImageUrl" class="form-control" placeholder="Enter Image URL" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-success btn-outline-success w-100 text-white">Submit Auction</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Winning Bids</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="logo.png" type="image/png">
+    <!-- boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Arimo font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+    <!-- boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- vtfont -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Limelight&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+        * {
+            font-family: "Arimo", sans-serif;
+            font-weight: 600;
+        }
+
+        .border-black {
+            border: 1px solid black;
+        }
+
+        .navbar-brand p {
+            transform: translateY(20%);
+        }
+
+        .brand-search-log {
+            height: 12vh;
+        }
+
+        .logo-left img {
+            /* width: 15%; */
+            max-width: 5rem;
+            margin-left: 1rem;
+            width: 100%;
+        }
+
+        .margin-right-3rem {
+            margin-right: 3rem;
+        }
+
+        .background-header {
+            height: 35vh;
+            border-radius: 2rem;
+        }
+
+        .background-header img {
+            /* width: 100%;
+            height: 40rem; */
+        }
+
+        .bg-image {
+            background-image: url('news.png');
+            background-size: cover;
+            /* ปรับภาพให้ครอบคลุมพื้นที่ทั้งหมด */
+            background-position: center;
+            /* กำหนดตำแหน่งของภาพ */
+            background-repeat: no-repeat;
+            /* ป้องกันการซ้ำของภาพ */
+        }
+
+        .background-header-container {
+            padding: 2rem 5rem 2rem 5rem;
+        }
+
+        .bg-gray {
+            background-color: #F0F0F0;
+        }
+
+        .bg-search {
+            background-color: #D9D9D9;
+            border: 0;
+
+        }
+
+
+
+        .logout-btn {
+            background-color: #ff9999;
+            /* เพิ่มการไล่สี */
+            color: white;
+            padding: 10px 20px;
+            margin-top: 31px;
+            margin-right: 3px;
+            width: 8%;
+            height: 36%;
+            border: none;
+            border-radius: 25px;
+
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            /* เพิ่มการเปลี่ยนแปลง */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .logout-btn:hover {
+            background-color: #ff9999;
+            /* สีเปลี่ยนเมื่อ Hover */
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+            /* ขยายปุ่มเล็กน้อยเมื่อ Hover */
+        }
+
+        .header-banner .search-input {
+            transform: translate(40px, 40px);
+            padding: 5px 20px;
+            width: 30%;
+            height: 20%;
+            border: 1px solid #D9D9D9;
+            border-radius: 2rem;
+            background-color: #D9D9D9;
+            font-family: 'Arimo';
+            font-size: 15px;
+        }
+
+        /* จัดข้อมูลโปรไฟล์ให้อยู่ตรงกลางและมีพื้นหลังสีขาว */
+        .profile-info {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        /* จัดรูปโปรไฟล์ให้อยู่บนสุดและทำเป็นวงกลม */
+        .profile-info .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+        }
+
+        .profile-info .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .profile-info p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* จัดปุ่มสำหรับ Edit Profile และ Change Password */
+        .profile-actions {
+            margin-top: 20px;
+        }
+
+        .profile-actions button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .edit-profile-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .change-password-btn {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .profile-info-container-fluid {
+            min-height: 100vh;
+            /* min-width: 100vh; */
+        }
+
+        /* .gallery-show {
+            min-width: 100vh;
+        }
+
+        .brand-search-log {
+
+            min-width: 100vh;
+        }
+
+        .background-header-container {
+            min-width: 100vh;
+        } */
+
+        .logout-button {
+            white-space: nowrap;
+            width: 7rem;
+        }
+
+        .logo-none {
+            display: none;
+        }
+
+        .nav-ml {
+            margin-left: 4rem;
+        }
+        .custom-img-bid{
+            margin-left: -10rem;
+        }
+        .monitor {
+            border: 2px solid #FF5A1A;
+            border-radius: 1rem;
+            background-color: #f8d7da;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.3);
+        }
+        .monitor p {
+            font-family: "VT323", monospace;
+            /* font-size: 100px; */
+            position: relative;
+            display: inline-block;
+            animation: move 10s infinite linear;
+            color: #004085;
+            font-size: 3rem;
+        }
+        .display-to-flex{
+            display: flex;
+        }
+        .nav-none-to-block{
+            display:none;
+        }
+        .auction-img {
+            border-radius: 1rem;
+            transition: 0.7s ease;
+        }
+
+        .auction-img:hover {
+            transform: scale(1.1);
+
+        }
+
+        .wrap-text {
+            word-wrap: break-word;
+            width: 280px; /* Adjust the width to fit your design */
+        }
+
+        
+        @keyframes move {
+            0% {
+                left: 100px;
+            }
+
+            50% {
+                left: -100px;
+            }
+            100% {
+                left: 100px;
+            }
+        }
+        @media(max-width:991px) {
+            .logo-none {
+                display: flex;
+            }
+
+            .nav-ml {
+                margin-left: 0rem;
+            }
+
+            .align-items-center .fw-bold {
+                white-space: nowrap;
+            }
+            .logout-none{
+                display: none;
+            }
+            .nav-none-to-block{
+            display:block;
+        }
+        }
+
+
+
+        /* Responsiveness for smaller screens */
+        @media screen and (max-width: 900px) {
+            /* .top-bar {
+                flex-direction: column;
+                padding: 10px;
+            } */
+
+            .header-banner {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .header-banner .search-input {
+                width: 80%;
+                margin: 10px 0;
+                transform: translate(0, 0);
+            }
+
+
+
+            .profile-info {
+                margin: 20px auto;
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            .profile-info h2 {
+                font-size: 20px;
+            }
+
+            .profile-info p {
+                font-size: 14px;
+            }
+
+            .profile-actions button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .search-signin {
+                transform: translateX(0);
+            }
+        }
+        .nav-item a , .hamberger-log-out{
+            font-size: 1.2rem;
+        }
+        @media(min-width:992px) {
+            /* pc */
+            .bg-pc-black {
+                background-color: black;
+            }
+
+            .text-pc-white {
+                color: white;
+            }
+
+            .text-pc-white:hover
+            {
+                color: rgb(183 183 183);
+            }
+            .navbar-nav .nav-link.active{
+                color: rgb(183 183 183);
+            }
+
+
+        }
+
+        @media(max-width:991px) {
+ /* mobile */
+            .bg-mobile-white {
+                background-color: white;
+            }
+          
+
+        }
+        .star {
+            width: 6vmin;
+            height: 6vmin;
+            background-color: gold;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            position: relative;
+            transform: translateX(100em) rotate(0deg);
+            animation: starMove 4s ease-out infinite;
+        }
+
+        @keyframes starMove {
+            0% {
+                transform: translateX(30em) rotate(0deg);
+            }
+
+            100% {
+                transform: translateX(-35em) rotate(360deg);
+            }
+        }
+
+        .brand-search-log {
+            /* min-height: 100vh; */
+            display: grid;
+            place-items: center;
+
+            --bkg: #5eb3fd;
+            --white: white;
+
+            background-color: var(--white);
+            background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+        }
+
+        .ticon {
+            /* width: 100%; */
+            height: 100%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .title {
+            position: absolute;
+            /* top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); */
+        }
+
+        .title h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            font-family: "Limelight", sans-serif;
+            color: black;
+        }
+        @media(max-width:510px) {
+            .title h1 {
+                font-size: 1.9rem;
+            }
+        }
+
+
+
+        @media(max-width:455px) {
+            .title h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media(max-width:349px) {
+            .title h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-mobile-white bg-pc-black fixed-top border-black p-0">
+        <div class="container-fluid">
+            <a class="navbar-brand  logo-none" href="#">
+                <p>Gallery Hall Online</p>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- <div class="display-none" id="openCart"><a class="nav-link fw-bold fs-2" href="#"><i
+                            class='bx bx-shopping-bag'></i></a></div> -->
+
+            <div class="collapse navbar-collapse nav-ml" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item ">
+                        <a class="nav-link text-pc-white" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-pc-white" href="add-auction.html">Add My Auction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-pc-white" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-pc-white" href="contact-us.html">Contact Us</a>
+                    </li>
+
+                    <!-- <li class="nav-item"><a class="nav-link fw-bold" href="#"><p>Home</p></a></li>
+    
+                        <li class="nav-item " data-bs-toggle="modal" data-bs-target="#exampleModal2"><button
+                                class="btn btn-lg btn-danger btn-outline-danger btn-nav-radius text-white"
+                                href="#">เข้าสู่ระบบ / ลงทะเบียน</button></li>
+    
+                        <li class="nav-item"><a class="nav-link  d-flex align-items-center gap-2 fw-bold fs-5" href="#"><i
+                                    class="bx bx-globe "></i>
+                                <p style="transform: translateY(25%);">TH</p>
+                            </a></li> -->
+                </ul>
+
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item logout-none">
+                        <a href="chat.html" class="btn btn-outline-secondary me-2 border-0">
+                            <i class='bx bxs-chat fs-3 text-white'></i>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-none-to-block pt-2">
+                        
+                        <a class="nav-link" href="chat.html">Chat</a>
+                  
+                </li>
+                    <li class="nav-item logo-none" onclick="logout()">
+                        
+                            <p class="text-danger">Log out</p>
+                      
+                    </li>
+                 
+
+                </ul>
+
+            </div>
+        </div>
+
+    </nav>
+    <div class="container-fluid mt-5 brand-search-log pt-4 mb-3 d-flex justify-content-between align-items-center">
+      
+        <div class="col-2 logo-left ">
+            <img class=" img-fluid w-100" src="logo.png">
+        </div>
+        <div class="col-9 col-lg-6 d-flex  align-items-center justify-content-center  h-100 center ticon">
+            <div class="title">
+                <h1 class=" fw-bold ">Gallery Hall Online</h1>
+            </div>
+            <div class="star">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+        </div>
+        <div class=" col-2 display-to-flex justify-content-end  logout-none  ">
+            <button class="  btn btn-danger text-white btn-outline-danger  rounded-pill fs-5 fw-bold logout-button"
+                onclick="logout()">Log out</button>
+            <script>function logout() {
+                    console.log("Logout button clicked");
+                    sessionStorage.removeItem("chatWithEmail");
+                    localStorage.removeItem("loggedInEmail");
+                    window.location.href = "login.html";
+                }</script>
+        </div>
+    </div>
+
+    
+    <div class="container-fluid profile-info-container-fluid bg-gray pt-5">
+        <div class=" bg-white align-items-center auction-grid d-flex row auction-list" id="auction-list">
+
+            <p class="pt-4 fs-3 justify-content-center  d-flex">My Winning Bids</p>
+            <!-- <div class="auction-item col-3 d-flex align-items-center flex-column pt-5 "> -->
+
+
+        </div>
+    </div>
+
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, where, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyBHqagE_76AF0f8bRg-9Mx_QF0GtEaTya8",
+        authDomain: "gho-project.firebaseapp.com",
+        projectId: "gho-project",
+        storageBucket: "gho-project.firebasestorage.app",
+        messagingSenderId: "217715167340",
+        appId: "1:217715167340:web:c68f10020c6c33d476c849"
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const loggedInEmail = localStorage.getItem("loggedInEmail");
+
+            if (!loggedInEmail) {
+                alert("You must be logged in to access this page.");
+                window.location.href = "login.html"; // Redirect to login page
+            }
+        });
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadMyWinningBids() {
+            const userEmail = localStorage.getItem("loggedInEmail");
+            const bidwinQuery = query(collection(db, "Bidwin"), where("email", "==", userEmail));
+            const bidwinSnapshot = await getDocs(bidwinQuery);
+            const auctionList = document.getElementById("auction-list");
+            const displayedAuctions = new Set(); // Set to store unique AuctionIDs
+
+            if (bidwinSnapshot.empty) {
+                auctionList.innerHTML = "<p>No winning bids found for your account.</p>";
+                return;
+            }
+
+            bidwinSnapshot.forEach(async (bidwinDoc) => {
+                const bidwinData = bidwinDoc.data();
+                const auctionId = bidwinData.AuctionID;
+
+                // Check if the auctionId has already been displayed
+                if (displayedAuctions.has(auctionId)) return;
+                displayedAuctions.add(auctionId); // Add to Set to avoid duplicates
+
+                // Fetch auction data from Auction collection
+                const auctionDoc = await getDoc(doc(db, "Auction", auctionId));
+                if (!auctionDoc.exists()) {
+                    console.error(`Auction with ID ${auctionId} not found.`);
+                    return;
+                }
+
+                const auctionData = auctionDoc.data();
+
+                // Create auction item element with image and details
+                const auctionItem = document.createElement("div");
+                auctionItem.classList.add("auction-item", "d-flex", "pt-3","pb-3","col-12","col-sm-6","col-lg-4","col-xl-3","justify-content-center","align-items-center" );
+                auctionItem.innerHTML = `
+                    <div class="border-0 card d-flex justify-content-center align-items-center pt-4" style="width: 20rem;height:40rem">
+                            <img class="w-100 h-100 auction-img" style="max-width: 17rem;max-height:17rem;border-radius:0.5rem;"  src="${auctionData.artImageUrl}" alt="${auctionData.artName}">
+                            <div class="card-body">
+                                <p class="card-title"><strong>Auction ID:</strong> ${auctionId}</p>
+                                <p class="card-text"><strong>Artwork Name:</strong> ${auctionData.artName}</p>
+                                <p class="card-text"><strong>Artwork Type:</strong> ${auctionData.artType}</p>
+                                <p class="card-text wrap-text"><strong>Description:</strong> ${auctionData.description}</p>
+                                <p class="card-text"><strong>Owner's Email:</strong> ${auctionData.createdBy}</p>
+                                <p class="card-text"><strong>Your Winning Bid:</strong> ${bidwinData.bidAmount}</p>
+                            </div>
+                        </div>
+                    `;
+
+                auctionList.appendChild(auctionItem);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadMyWinningBids);
+    </script>
+     <!-- boostrap -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

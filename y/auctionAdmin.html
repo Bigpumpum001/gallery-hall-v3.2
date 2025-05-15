@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+      /* Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        display: flex;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+      }
+      .sidebar {
+        width: 250px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-height: 100vh;
+      }
+      .sidebar h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .sidebar a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px;
+        transition: background 0.3s;
+      }
+      .sidebar a:hover {
+        background-color: #555;
+      }
+      .main-content {
+        flex: 1;
+        padding: 20px;
+      }
+      .main-content h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+      .search-container {
+        margin-bottom: 20px;
+      }
+      .search-input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      button {
+        padding: 8px 12px;
+        margin: 0 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .view-btn {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .delete-btn {
+        background-color: #f44336;
+        color: white;
+      }
+
+      .bidding-btn {
+        background-color: #007BFF;
+        color: white;
+      }
+
+      .filter-buttons {
+        margin-bottom: 17px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .filter-btn {
+        padding: 8px 12px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .filter-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .sidebar a.active {
+        background-color: #777; /* Or any color you want for the active state */
+      }
+      /* .menu-container{
+        display: none;
+      } */
+      .menu-container {
+            position: relative;
+            display: none;
+        }
+        .menu-button {
+          
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+         
+        }
+        .menu-items {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+        .menu-items a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .menu-items a:hover {
+            background-color: #575757;
+        }
+        .menu-container:hover .menu-items {
+            display: block;
+        }
+
+        
+
+    
+
+      @media(max-width:991px){
+        .sidebar{
+          display: none;
+        }
+     
+        .menu-container{
+        display: inline-block;
+        position: relative;
+      }
+      .menu-container{
+        margin-bottom: 1rem;
+      }
+      }
+
+   </style>
+   
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+    <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+    import { getFirestore, collection, getDocs, deleteDoc, doc, query, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBHqagE_76AF0f8bRg-9Mx_QF0GtEaTya8",
+      authDomain: "gho-project.firebaseapp.com",
+      projectId: "gho-project",
+      storageBucket: "gho-project.firebasestorage.app",
+      messagingSenderId: "217715167340",
+      appId: "1:217715167340:web:c68f10020c6c33d476c849"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!localStorage.getItem("isLoggedIn")) {
+          alert("You are not logged in. Redirecting to login page.");
+          window.location.href = "login.html";  // Redirect to login page
+      } else {
+          const loggedInEmail = localStorage.getItem("loggedInEmail");
+          console.log("Logged in as: ", loggedInEmail);  // Optionally log or use the email
+          await fetchAuctions();
+      }  
+    });
+
+    const links = document.querySelectorAll(".sidebar a");
+    const currentPage = window.location.pathname.split("/").pop();
+
+    links.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+        }
+    });
+
+    document.getElementById('logoutLink').addEventListener('click', function() {
+      localStorage.removeItem("isLoggedIn");
+      sessionStorage.removeItem("chatWithEmail");
+      localStorage.removeItem("loggedInEmail");
+      window.location.href = "login.html";
+    });
+
+    async function fetchAuctions() {
+      const auctionTable = document.getElementById('auctionTable');
+      auctionTable.innerHTML = ''; // Clear table before populating
+      const q = query(collection(db, 'Auction'));
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doc) => {
+        const auction = doc.data();
+        const createdAt = auction.createdAt ? new Date(auction.createdAt.seconds * 1000) : null;
+        
+        let endTime = createdAt;
+        if (createdAt && auction.auctionDuration) {
+          endTime = new Date(createdAt.getTime() + auction.auctionDuration.hours * 3600000 
+              + auction.auctionDuration.minutes * 60000 
+              + auction.auctionDuration.seconds * 1000);
+        }
+
+        const now = new Date();
+        const status = endTime && now > endTime ? 
+          '<span style="color: red;">Auction End</span>' : 
+          '<span style="color: green;">Current Auction</span>';
+
+        const formattedDate = createdAt ? createdAt.toLocaleDateString() : 'No Date';
+        
+        // Truncate artist name to first 6 characters
+        const truncatedArtistName = auction.artistName.substring(0, 10);
+
+        const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${auction.auctionID}</td>
+            <td>${auction.artName}</td>
+            <td>${auction.artType}</td>
+            <td>${truncatedArtistName}</td>
+            <td>${formattedDate}</td>
+            <td>${auction.createdBy}</td>
+            <td>${auction.minBid}</td>
+            <td>${auction.startingPrice}</td>
+            <td>${status}</td>
+            <td>
+              <button class="view-btn" data-id="${doc.id}">View</button>     
+              <button class="bidding-btn" onclick="showBids('${doc.id}')">Bidding</button>           
+              <button class="delete-btn" onclick="deleteAuction('${doc.id}')">Delete</button>
+            </td>
+          `;
+          auctionTable.appendChild(row);
+        });
+
+      // Re-select all view buttons and add event listeners
+      document.querySelectorAll('.view-btn').forEach(button => {
+        button.addEventListener('click', () => showModal(button.getAttribute('data-id')));
+      });
+    }
+   
+    window.showModal = async function showModal(auctionId) {
+        const docRef = doc(db, "Auction", auctionId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById('modalArtName').textContent = data.artName || 'N/A';
+            document.getElementById('modalArtImage').src = data.artImageUrl || '';
+            document.getElementById('modalArtType').textContent = data.artType || 'N/A';
+            document.getElementById('modalArtistName').textContent = data.artistName || 'N/A';
+            document.getElementById('modalDescription').textContent = data.description || 'N/A';
+            document.getElementById('modalCreatedAt').textContent = data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleString() : 'N/A';
+            document.getElementById('modalCreatedBy').textContent = data.createdBy || 'N/A';
+            
+            document.getElementById('auctionModal').style.display = 'block';
+        } else {
+            console.log("No such document!");
+        }
+    }
+  
+    // Ensure that searchTable is defined in the global scope
+    function searchTable() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const tableRows = document.querySelectorAll('#auctionTable tr');
+
+      tableRows.forEach((row) => {
+        const rowText = Array.from(row.cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+        row.style.display = rowText.includes(input) ? '' : 'none';
+      });
+    }
+
+    // Export the function to make sure it's available in the HTML
+    window.searchTable = searchTable;
+
+    async function deleteAuction(auctionId) {
+      const confirmation = confirm("Are you sure you want to delete this auction?");
+      if (confirmation) {
+        try {
+          await deleteDoc(doc(db, 'Auction', auctionId));
+          document.querySelector(`button.delete-btn[onclick="deleteAuction('${auctionId}')"]`).parentNode.parentNode.remove();
+          alert('Auction deleted successfully');
+        } catch (error) {
+          console.error('Error deleting auction: ', error);
+          alert('Failed to delete the auction.');
+        }
+      }
+    }
+
+    window.deleteAuction = deleteAuction;
+
+    let currentAuctionId = null;
+      window.editAuction = function() {
+      document.getElementById('auctionModal').style.display = 'none';
+      const auctionRef = doc(db, "Auction", currentAuctionId);
+      getDoc(auctionRef).then(docSnap => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          document.getElementById('editArtName').value = data.artName || '';
+          document.getElementById('editArtType').value = data.artType || 'Painting';
+          document.getElementById('editArtistName').value = data.artistName || '';
+          document.getElementById('editDescription').value = data.description || '';
+          document.getElementById('editAuctionModal').style.display = 'block';
+        } else {
+          alert("No such document!");
+        }
+      }).catch(error => {
+        console.error("Error getting document:", error);
+      });
+    };
+
+    function showModal(auctionId) {
+        currentAuctionId = auctionId;
+        const docRef = doc(db, "Auction", auctionId);
+        getDoc(docRef).then((docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                
+                // จัดการข้อมูลทั่วไป
+                document.getElementById('modalArtName').textContent = data.artName || 'N/A';
+                document.getElementById('modalArtImage').src = data.artImageUrl || '';
+                document.getElementById('modalArtType').textContent = data.artType || 'N/A';
+                document.getElementById('modalArtistName').textContent = data.artistName || 'N/A';
+                document.getElementById('modalCreatedAt').textContent = data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleString() : 'N/A';
+                document.getElementById('modalCreatedBy').textContent = data.createdBy || 'N/A';
+
+                // จัดการ Description แบบพิเศษ
+                let description = data.description || 'N/A';
+                if (description !== 'N/A') {
+                    // แบ่งข้อความเป็นบรรทัด
+                    let lines = [];
+                    let currentPosition = 0;
+                    
+                    // บรรทัดแรกตัดที่ 3 ตัวอักษร
+                    lines.push(description.slice(0, 19));
+                    currentPosition = 19;
+                    
+                    // บรรทัดที่เหลือตัดที่ 10 ตัวอักษร
+                    while (currentPosition < description.length) {
+                        lines.push(description.slice(currentPosition, currentPosition + 30));
+                        currentPosition += 30;
+                    }
+                    
+                    description = lines.join('<br>');
+                }
+                document.getElementById('modalDescription').innerHTML = description;
+
+                // แสดง modal
+                document.getElementById('auctionModal').style.display = 'block';
+            } else {
+                console.log("No such document!");
+            }
+        });
+    }
+
+    window.saveAuction = async function() {
+        // เก็บข้อมูลที่อัปเดต
+      const updatedData = {
+        artName: document.getElementById('editArtName').value,
+        artType: document.getElementById('editArtType').value,
+        artistName: document.getElementById('editArtistName').value,
+        description: document.getElementById('editDescription').value,
+      };
+
+      try {
+        await updateDoc(doc(db, 'Auction', currentAuctionId), updatedData);
+        alert("Auction updated successfully");
+
+        // เปลี่ยนไปที่หน้า auctionAdmin.html
+        window.location.href = "auctionAdmin.html";
+      } catch (error) {
+        console.error("Error updating document:", error);
+        alert("Failed to update the auction.");
+      }
+    };      
+
+    window.goBackToAuctionModal = function() {
+      // ซ่อน editAuctionModal
+      document.getElementById('editAuctionModal').style.display = 'none';
+      // แสดง auctionModal
+      document.getElementById('auctionModal').style.display = 'block';
+    };
+
+    window.filterAuctions = function(status) {
+      const tableRows = document.querySelectorAll('#auctionTable tr');
+
+      tableRows.forEach((row) => {
+        const statusText = row.cells[8].textContent.toLowerCase();
+
+        if (status === 'all') {
+          row.style.display = '';
+        } else if (status === 'current' && statusText.includes('current auction')) {
+          row.style.display = '';
+        } else if (status === 'ended' && statusText.includes('auction end')) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    };
+
+    window.showBids = async function(auctionId) {
+      const bidsContainer = document.getElementById('bidsContainer');
+      bidsContainer.innerHTML = ''; // Clear previous bid data
+
+      try {
+        const bidsRef = collection(db, 'Auction', auctionId, 'bids');
+        const querySnapshot = await getDocs(bidsRef);
+
+        querySnapshot.forEach((doc) => {
+          const bid = doc.data();
+          console.log('Bid Data:', bid); // Debugging
+          const bidElement = document.createElement('p');
+          bidElement.textContent = `Bid Amount: ${bid.bidAmount}, User Email: ${bid.userEmail}`;
+          bidElement.style.marginBottom = '5px';
+          bidsContainer.appendChild(bidElement);
+        });
+
+        document.getElementById('bidsModal').style.display = 'block';
+      } catch (error) {
+        console.error('Error fetching bids:', error); // Error handling
+      }
+    };
+
+
+  </script>
+  
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Admin Panel</h2>
+    
+      <a href="home2.html">Dashboard</a>
+      <a href="userAdmin.html">Users</a>
+      <a href="auctionAdmin.html">Auctions</a>
+      <a href="reportAdmidAuction.html">Report Auction</a>
+      <a href="reportAdminUser.html">Report User</a>
+      <a href="chat.html">Chat</a>
+      <a href="javascript:void(0);" id="logoutLink">Logout</a>
+    </div>
+    <div class="main-content">
+      <div class="menu-container">
+        <button class="menu-button">☰</button>
+        <div class="menu-items">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <h1>Auction Management</h1>
+      <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search auctions by art name, type, or artist..." onkeyup="searchTable()">
+      </div>
+      <div class="filter-buttons">
+        <button onclick="filterAuctions('all')" class="filter-btn">All</button>
+        <button onclick="filterAuctions('current')" class="filter-btn">Current Auction</button>
+        <button onclick="filterAuctions('ended')" class="filter-btn">Auction End</button>
+      </div>
+
+      <!-- The Modal -->
+      <div id="auctionModal" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 40%; display: flex; align-items: flex-start; gap: 20px;">
+          <span onclick="document.getElementById('auctionModal').style.display='none'" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+          
+          <!-- Image on the left -->
+          <img id="modalArtImage" src="" alt="Art Image" style="max-width: 35%;">
+      
+          <!-- Text content on the right -->
+          <div style="flex: 1;">
+            <h2 id="modalArtName" style="font-size: 25px; margin-bottom: 10px;"></h2>
+            <p style="font-size: 20px;"><strong>Type:</strong> <span id="modalArtType"></span></p>
+            <p style="font-size: 20px;"><strong>Artist:</strong> <span id="modalArtistName"></span></p>
+            <p style="font-size: 20px;"><strong>Description:</strong> <span id="modalDescription"></span></p>
+            <p style="font-size: 20px;"><strong>Created At:</strong> <span id="modalCreatedAt"></span></p>
+            <p style="font-size: 20px;"><strong>Created By:</strong> <span id="modalCreatedBy"></span></p>
+      
+            <!-- Edit Button -->
+            <button onclick="editAuction()" style="font-size: 18px; padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Edit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Modal -->
+      <div id="editAuctionModal" style="display:none; position: fixed; z-index: 2; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fff; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 30%; border-radius: 8px;">
+          <span onclick="document.getElementById('editAuctionModal').style.display='none'" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+          <h2 style="font-size: 25px; margin-bottom: 20px;">Edit Auction</h2>
+
+          <label for="editArtName">Art Name:</label>
+          <input type="text" id="editArtName" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+          <label for="editArtType">Art Type:</label>
+          <select id="editArtType" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+            <option value="Abstract">Abstract</option>
+            <option value="Sculpture">Sculpture</option>
+            <option value="Painting">Painting</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label for="editArtistName">Artist Name:</label>
+          <input type="text" id="editArtistName" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+          <label for="editDescription">Description:</label>
+          <textarea id="editDescription" style="width: 100%; padding: 8px; margin-bottom: 20px;"></textarea>
+          <button onclick="saveAuction()" style="font-size: 18px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+          <button onclick="goBackToAuctionModal()" style="font-size: 18px; padding: 10px 20px; background-color: #f4f4f4; color: black; border: 1px solid #ccc; border-radius: 5px; cursor: pointer; margin-right: 10px;">Back</button>
+        </div>
+      </div>
+
+      <div id="bidsModal" style="display:none; position: fixed; z-index: 2; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fff; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 40%; border-radius: 8px;">
+          <span onclick="document.getElementById('bidsModal').style.display='none'" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; ">&times;</span>
+          <h2 style="font-size: 25px; margin-bottom:13px;">Bids</h2>
+          <div id="bidsContainer" >
+            <!-- Bid information will be populated here -->
+          </div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Auction ID</th>
+            <th>Art Name</th>
+            <th>Art Type</th>
+            <th>Artist Name</th>
+            <th>Created At</th>
+            <th>Created By</th>
+            <th>Min Bid</th>
+            <th>Starting Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="auctionTable">
+          <!-- Auction data will be populated here -->
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

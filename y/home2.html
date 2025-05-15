@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .btn-go-home {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-go-home:hover {
+            background-color: #0056b3;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 100vh;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        .sidebar a.active {
+            background-color: #777;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .card.red {
+            background-color: #ffcccc;
+        }
+
+        #simple-form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            grid-column: span 2;
+        }
+
+        #simple-form .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555555;
+        }
+
+        #simple-form .btn {
+            width: 100%;
+            background-color: #28a745;
+            color: #ffffff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #simple-form .btn:hover {
+            background-color: #218838;
+        }
+
+        #preview-image {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <a href="home2.html">Dashboard</a>
+        <a href="userAdmin.html">Users</a>
+        <a href="auctionAdmin.html">Auctions</a>
+        <a href="reportAdmidAuction.html">Report Auction</a>
+        <a href="reportAdminUser.html">Report User</a>
+        <a href="chat.html">Chat</a>
+        <a href="javascript:void(0);" id="logoutLink">Logout</a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Dashboard</h1>
+            <button class="btn-go-home" onclick="goToHomePage()">Go to Home</button>
+        </div>
+
+        <div class="dashboard">
+            <div class="card" id="userCard">
+                <h3>Total Users</h3>
+                <p id="userCount">Loading...</p>
+            </div>
+            <div class="card" id="auctionCard">
+                <h3>Total Auctions</h3>
+                <p id="auctionCount">Loading...</p>
+            </div>
+            <div class="card" id="reportCard">
+                <h3>Total Reports</h3>
+                <p id="reportCount">Loading...</p>
+            </div>
+            <div class="card" id="reportUserCard">
+                <h3>Total Reported Users</h3>
+                <p id="reportUserCount">Loading...</p>
+            </div>
+
+            <form id="simple-form">
+                <a href="https://products.aspose.app/pdf/th/conversion/png-to-html" target="_blank">Website to convert File to URL 1800 x 320px</a>
+                <br><br>
+                <div class="form-group">
+                    <label for="imageUrl">Image URL</label>
+                    <input type="url" id="imageUrl" class="form-control" placeholder="Enter Image URL" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="textMessage">Text Message</label>
+                    <textarea id="textMessage" class="form-control" rows="4" required></textarea>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="expiryDateTime">Expiry Date and Time</label>
+                    <input type="datetime-local" id="expiryDateTime" class="form-control" required>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success w-100">Submit</button>
+            </form>
+
+            <div id="preview-section" style="grid-column: span 2;">
+                <h2>Image Preview</h2>
+                <img id="preview-image" src="" alt="Image Preview" style="display: none;">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+    
+    <script>
+        function goToHomePage() {
+            window.location.href = "home.html";
+        }
+    </script>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, serverTimestamp, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHqagE_76AF0f8bRg-9Mx_QF0GtEaTya8",
+            authDomain: "gho-project.firebaseapp.com",
+            projectId: "gho-project",
+            storageBucket: "gho-project.firebasestorage.app",
+            messagingSenderId: "217715167340",
+            appId: "1:217715167340:web:c68f10020c6c33d476c849"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Check login status
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!localStorage.getItem("isLoggedIn")) {
+                alert("You are not logged in. Redirecting to login page.");
+                window.location.href = "login.html";
+            }
+
+            // Set minimum datetime to current time
+            const dateTimeInput = document.getElementById('expiryDateTime');
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            dateTimeInput.min = now.toISOString().slice(0, 16);
+            dateTimeInput.value = now.toISOString().slice(0, 16);
+        });
+
+        // Handle active link in sidebar
+        const links = document.querySelectorAll(".sidebar a");
+        const currentPage = window.location.pathname.split("/").pop();
+        links.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active");
+            }
+        });
+
+        // Handle logout
+        document.getElementById('logoutLink').addEventListener('click', function() {
+            localStorage.removeItem("isLoggedIn");
+            sessionStorage.removeItem("chatWithEmail");
+            localStorage.removeItem("loggedInEmail");
+            window.location.href = "login.html";
+        });
+
+        // Listen for updates
+        function listenForUpdates() {
+            const collections = [
+                { name: 'User', cardId: 'userCard', countId: 'userCount' },
+                { name: 'Auction', cardId: 'auctionCard', countId: 'auctionCount' },
+                { name: 'Reports', cardId: 'reportCard', countId: 'reportCount' },
+                { name: 'reportUser', cardId: 'reportUserCard', countId: 'reportUserCount' }
+            ];
+
+            collections.forEach(({ name, cardId, countId }) => {
+                const cardElement = document.getElementById(cardId);
+                const countElement = document.getElementById(countId);
+
+                onSnapshot(collection(db, name), (snapshot) => {
+                    countElement.innerText = snapshot.size;
+                    cardElement.classList.add('red');
+                    setTimeout(() => {
+                        cardElement.classList.remove('red');
+                    }, 2000);
+                });
+            });
+        }
+        
+        listenForUpdates();
+
+        // Handle form submission
+        document.getElementById("simple-form").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const imageUrl = document.getElementById("imageUrl").value;
+            const textMessage = document.getElementById("textMessage").value;
+            const expiryDateTime = new Date(document.getElementById("expiryDateTime").value);
+
+            if (expiryDateTime <= new Date()) {
+                alert("Please select a future date and time for expiry");
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "News"), {
+                    imageUrl,
+                    textMessage,
+                    createdAt: serverTimestamp(),
+                    expiryTimestamp: expiryDateTime
+                });
+                alert("News uploaded successfully!");
+                document.getElementById("simple-form").reset();
+                
+                const previewImage = document.getElementById("preview-image");
+                previewImage.src = imageUrl;
+                previewImage.style.display = "block";
+            } catch (error) {
+                console.error("Error uploading News: ", error);
+                alert("Error uploading news: " + error.message);
+            }
+        });
+
+        // Check and delete expired news
+        async function deleteExpiredNewsClientSide() {
+            const now = Date.now();
+            const newsRef = collection(db, "News");
+            const q = query(newsRef, where("expiryTimestamp", "<=", new Date(now)));
+
+            try {
+                const snapshot = await getDocs(q);
+                snapshot.forEach(async (doc) => {
+                    await deleteDoc(doc.ref);
+                    console.log(`Deleted expired document with ID: ${doc.id}`);
+                });
+            } catch (error) {
+                console.error("Error deleting expired documents: ", error);
+            }
+        }
+
+        setInterval(deleteExpiredNewsClientSide, 5000);
+    </script>
+</body>
+</html>

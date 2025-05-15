@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+      /* Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        display: flex;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+      }
+      .sidebar {
+        width: 250px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-height: 100vh;
+      }
+      .sidebar h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .sidebar a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px;
+        transition: background 0.3s;
+      }
+      .sidebar a:hover {
+        background-color: #555;
+      }
+      .main-content {
+        flex: 1;
+        padding: 20px;
+      }
+      .main-content h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      button {
+        padding: 8px 12px;
+        margin: 0 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .edit-btn {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .delete-btn {
+        background-color: #f44336;
+        color: white;
+      }
+      .search-container {
+        margin-bottom: 10px;
+      }
+      .search-input {
+        width: 100%;
+        padding: 5px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .sidebar a.active {
+        background-color: #777; /* Or any color you want for the active state */
+      }
+      .chat-btn {
+        background-color: #008CBA; /* Customize the color */
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .ban-btn {
+        background-color: #ff9800; /* สีส้ม */
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+       /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 300px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .modal-content input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .modal-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+      .modal-buttons button {
+        flex: 1;
+        margin: 0 5px;
+      }
+      .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close-btn:hover {
+        color: black;
+      }
+
+       /* Modal styles */
+       .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 300px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .modal-content input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .modal-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+      .modal-buttons button {
+        flex: 1;
+        margin: 0 5px;
+      }
+      .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close-btn:hover {
+        color: black;
+      }
+
+      .modal-content textarea {
+      width: 100%; 
+      height: 100px; /* หรือเพิ่มความสูงมากกว่านี้ตามความต้องการ */
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    .ban-info {
+      text-align: left;
+      padding: 20px;
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      margin: 15px 0;
+      border: 1px solid #ddd;
+    }
+
+    .ban-info .reason-section {
+      margin-bottom: 15px;
+    }
+
+    .ban-info .reason-title {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .ban-info .reason-content {
+      background-color: white;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+      min-height: 80px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .ban-info .date-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .ban-info .date-item {
+      background-color: white;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .ban-info .date-label {
+      font-weight: bold;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+
+    </style>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Admin Panel</h2>
+      <a href="home2.html">Dashboard</a>
+        <a href="userAdmin.html">Users</a>
+        <a href="auctionAdmin.html">Auctions</a>
+        <a href="reportAdmidAuction.html">Report Auction</a>
+        <a href="reportAdminUser.html">Report User</a>
+        <a href="chat.html">Chat</a>
+        <a href="javascript:void(0);" id="logoutLink">Logout</a>
+    </div>
+    <div class="main-content">
+      <h1>User Management</h1>
+      <div class="search-container">
+        <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search users by name, email, or gender..."
+            onkeyup="searchTable()"
+        />
+      </div>
+      <table>
+        <thead>
+          <tr>         
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Date of birth</th>
+            <th>Age</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="userTable">
+          <!-- User data will be populated here -->
+        </tbody>
+      </table>
+    </div>
+
+     <!-- Ban Modal -->
+     <div id="banModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeBanModal()">&times;</span>
+      <h2 id="banModalTitle">Ban User</h2>
+      
+      <!-- Ban view -->
+      <div id="banView">
+        <input 
+          type="number" 
+          id="banDuration" 
+          placeholder="Ban duration (days)" 
+          min="1"
+        />
+        <textarea 
+          id="banReason" 
+          placeholder="Reason for ban (optional)" 
+          rows="3"
+        ></textarea>
+      </div>
+
+      <!-- Unban view -->
+      <div id="unbanView" style="display: none;">
+        <div class="ban-info">
+          <div class="reason-section">
+            <div class="reason-title">Ban Reason:</div>
+            <div class="reason-content" id="currentBanReason"></div>
+          </div>
+          <div class="date-section">
+            <div class="date-item">
+              <div class="date-label">Ban Date:</div>
+              <div id="banDate"></div>
+            </div>
+            <div class="date-item">
+              <div class="date-label">End Date:</div>
+              <div id="banEndDate"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-buttons">
+        <button onclick="confirmBan()">Confirm</button>
+        <button onclick="closeBanModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+    <script type="module">
+      // Import Firebase
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+      import {   getFirestore, collection, getDocs, doc, deleteDoc, setDoc, addDoc, Timestamp, getDoc,query,where } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBHqagE_76AF0f8bRg-9Mx_QF0GtEaTya8",
+        authDomain: "gho-project.firebaseapp.com",
+        projectId: "gho-project",
+        storageBucket: "gho-project.firebasestorage.app",
+        messagingSenderId: "217715167340",
+        appId: "1:217715167340:web:c68f10020c6c33d476c849"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Global variables for ban functionality
+      let currentUserIdToBan = null;
+
+      // Function to open ban modal
+      async function banUser(userId, currentStatus) {
+        // First get the user's email
+        const userRef = doc(db, 'User', userId);
+        const userDoc = await getDoc(userRef);
+        const userData = userDoc.data();
+
+        // Check if user is admin
+        if (userData.email === 'admin@admin.com') {
+          alert('Cannot ban administrator account');
+          return;
+        }
+
+        currentUserIdToBan = userId;
+        const banModal = document.getElementById('banModal');
+        const modalTitle = document.getElementById('banModalTitle');
+        const banView = document.getElementById('banView');
+        const unbanView = document.getElementById('unbanView');
+        
+        if (currentStatus === 'Banned') {
+          // Show unban view
+          modalTitle.textContent = 'Unban User';
+          banView.style.display = 'none';
+          unbanView.style.display = 'block';
+          
+          // Fetch and display ban information
+          try {
+            const bannedRef = collection(db, 'banned');
+            const q = query(bannedRef, where('userId', '==', userId));
+            const banSnapshot = await getDocs(q);
+            
+            if (!banSnapshot.empty) {
+              const banData = banSnapshot.docs[0].data();
+              
+              // Format dates
+              const banDate = banData.bannedAt.toDate().toLocaleDateString();
+              const endDate = banData.banEndDate.toDate().toLocaleDateString();
+              
+              // Display ban information
+              document.getElementById('currentBanReason').textContent = banData.banReason || 'No reason provided';
+              document.getElementById('banDate').textContent = banDate;
+              document.getElementById('banEndDate').textContent = endDate;
+            }
+          } catch (error) {
+            console.error('Error fetching ban details:', error);
+          }
+        } else {
+          // Show ban view
+          modalTitle.textContent = 'Ban User';
+          banView.style.display = 'block';
+          unbanView.style.display = 'none';
+          document.getElementById('banDuration').value = '';
+          document.getElementById('banReason').value = '';
+        }
+        
+        banModal.style.display = 'block';
+      }
+
+      // Function to close ban modal
+      function closeBanModal() {
+        document.getElementById('banModal').style.display = 'none';
+        currentUserIdToBan = null;
+      }
+
+      // Function to confirm ban/unban
+      async function confirmBan() {
+        if (!currentUserIdToBan) return;
+
+        try {
+            const userRef = doc(db, 'User', currentUserIdToBan);
+            const userDoc = await getDoc(userRef);
+            const userData = userDoc.data();
+
+            // ตรวจสอบว่าผู้ใช้ถูกแบนอยู่หรือไม่
+            if (userData.status === 'Banned') {
+                // กรณี Unban
+                await setDoc(userRef, { status: 'Active' }, { merge: true });
+
+                // ลบข้อมูลการแบนออกจาก banned collection
+                const bannedRef = collection(db, 'banned');
+                const q = query(bannedRef, where('userId', '==', currentUserIdToBan));
+                const banSnapshot = await getDocs(q);
+
+                banSnapshot.forEach(async (banDoc) => {
+                    await deleteDoc(doc(db, 'banned', banDoc.id));
+                });
+
+                alert('User has been unbanned successfully');
+            } else {
+                // กรณี Ban
+                const banDurationInput = document.getElementById('banDuration');
+                const banReasonInput = document.getElementById('banReason');
+                const banDuration = banDurationInput.value.trim();
+                const banReason = banReasonInput.value.trim();
+
+                // ตรวจสอบข้อมูลการแบน
+                if (!banDuration || !banReason) {
+                    alert('Please enter both duration and reason for the ban.');
+                    return;
+                }
+
+                const days = parseInt(banDuration);
+                const banEndDate = new Date();
+                banEndDate.setDate(banEndDate.getDate() + days);
+
+                const bannedRef = collection(db, 'banned');
+                await addDoc(bannedRef, {
+                    userId: currentUserIdToBan,
+                    email: userData.email,
+                    banReason: banReason,
+                    bannedAt: Timestamp.now(),
+                    banEndDate: Timestamp.fromDate(banEndDate)
+                });
+
+                await setDoc(userRef, { status: 'Banned' }, { merge: true });
+                alert(`User has been banned for ${days} days`);
+            }
+
+            // รีเฟรชตารางและปิด modal
+            fetchUsers();
+            closeBanModal();
+        } catch (error) {
+            console.error('Error in ban/unban process:', error);
+            alert('An error occurred while processing the ban/unban action');
+        }
+    }
+
+      async function checkAndUnbanUsers() {
+        try {
+          const bannedRef = collection(db, 'banned');
+          const now = Timestamp.now();
+          
+          // Get all banned users
+          const bannedSnapshot = await getDocs(bannedRef);
+          
+          for (const banDoc of bannedSnapshot.docs) {
+            const banData = banDoc.data();
+            
+            // Check if ban period has expired
+            if (banData.banEndDate.toDate() <= now.toDate()) {
+              // Update user status to Active
+              const userRef = doc(db, 'User', banData.userId);
+              await setDoc(userRef, { status: 'Active' }, { merge: true });
+              
+              // Remove ban record
+              await deleteDoc(doc(db, 'banned', banDoc.id));
+              
+              console.log(`User ${banData.email} has been automatically unbanned`);
+            }
+          }
+        } catch (error) {
+          console.error('Error in automatic unban process:', error);
+        }
+      }
+      checkAndUnbanUsers();
+      setInterval(checkAndUnbanUsers, 5000);
+
+      // Expose functions globally
+      window.banUser = banUser;
+      window.closeBanModal = closeBanModal;
+      window.confirmBan = confirmBan;
+
+      document.addEventListener("DOMContentLoaded", () => {
+          const isLoggedIn = localStorage.getItem("isLoggedIn");
+          if (!isLoggedIn) {
+              alert("You are not logged in. Redirecting to login page.");
+              window.location.href = "login.html";  // Redirect to login page
+          } else {
+              const loggedInEmail = localStorage.getItem("loggedInEmail");
+              console.log("Logged in as: ", loggedInEmail);  // Optionally use the email to modify the page
+              // Additional code can follow here to adjust the page based on user info
+          }
+      });
+
+      const links = document.querySelectorAll(".sidebar a");
+      const currentPage = window.location.pathname.split("/").pop();
+
+      links.forEach(link => {
+          if (link.getAttribute("href") === currentPage) {
+              link.classList.add("active");
+          }
+      });
+
+      document.getElementById('logoutLink').addEventListener('click', function() {
+        localStorage.removeItem("isLoggedIn");
+        sessionStorage.removeItem("chatWithEmail");
+        localStorage.removeItem("loggedInEmail");
+        window.location.href = "login.html";
+      });
+
+      // Function to calculate age from date of birth
+      function calculateAge(dateOfBirth) {
+        const birthDate = new Date(dateOfBirth);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age;
+      }
+
+      // Ensure that searchTable is defined in the global scope
+      function searchTable() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const tableRows = document.querySelectorAll('#userTable tr');
+
+        tableRows.forEach((row) => {
+          const rowText = Array.from(row.cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+          row.style.display = rowText.includes(input) ? '' : 'none';
+        });
+      }
+      // Export the function to make sure it's available in the HTML
+      window.searchTable = searchTable;
+
+      // Function to delete a user
+      async function deleteUser(userId) {
+        try {
+          const userRef = doc(db, 'User', userId);
+          const userDoc = await getDoc(userRef);
+          const userData = userDoc.data();
+          
+          if (userData.email === 'admin@admin.com') {
+            alert('Cannot delete administrator account');
+            return;
+          }
+
+          const confirmation = confirm("Are you sure you want to delete this user?");
+          if (confirmation) {
+            await deleteDoc(userRef);
+            const rowToDelete = document.querySelector(`button.delete-btn[onclick="deleteUser('${userId}')"]`).parentElement.parentElement;
+            rowToDelete.remove();
+            alert('User deleted successfully');
+          }
+        } catch (error) {
+          console.error('Error deleting user: ', error);
+          alert('Error deleting user');
+        }
+      }
+      window.deleteUser = deleteUser;
+
+      // Function to edit a user
+      async function editUser(userId) {
+        const userRef = doc(db, 'User', userId);
+        const userDoc = await getDoc(userRef);
+        const userData = userDoc.data();
+
+        if (userData.email === 'admin@admin.com') {
+          alert('Cannot modify administrator account');
+          return;
+        }
+
+        const row = document.querySelector(`button.edit-btn[onclick="editUser('${userId}')"]`).parentElement.parentElement;
+        const cells = row.querySelectorAll('td');
+
+        cells[0].innerHTML = `<input type="text" value="${cells[0].textContent}" />`;
+        cells[1].innerHTML = `<input type="text" value="${cells[1].textContent}" />`;
+        cells[2].innerHTML = `<input type="text" value="${cells[2].textContent}" />`;
+
+        const today = new Date().toISOString().split('T')[0];
+        cells[4].innerHTML = `<input type="date" value="${cells[4].textContent}" max="${today}" />`;
+
+        cells[3].innerHTML = `
+          <select>
+            <option value="Male" ${cells[3].textContent === 'Male' ? 'selected' : ''}>Male</option>
+            <option value="Female" ${cells[3].textContent === 'Female' ? 'selected' : ''}>Female</option>
+            <option value="Other" ${cells[3].textContent === 'Other' ? 'selected' : ''}>Other</option>
+          </select>
+        `;
+
+        const editButton = row.querySelector('.edit-btn');
+        editButton.textContent = 'Save';
+        editButton.classList.remove('edit-btn');
+        editButton.classList.add('save-btn');
+        editButton.onclick = () => saveUser(userId, row);
+      }
+      window.editUser = editUser;
+
+      // Function to check if email already exists
+      async function emailExists(newEmail, currentUserId) {
+        const querySnapshot = await getDocs(collection(db, 'User'));
+        let exists = false;
+        querySnapshot.forEach((doc) => {
+          if (doc.data().email === newEmail && doc.id !== currentUserId) {
+            exists = true;
+          }
+        });
+        return exists;
+      }
+      
+      // Function to save edited user data
+      async function saveUser(userId, row) {
+        const inputs = row.querySelectorAll('input');
+        const genderSelect = row.querySelector('select');
+        
+        // Get the current user data to preserve the status
+        const userRef = doc(db, 'User', userId);
+        const userSnap = await getDoc(userRef);
+        const currentStatus = userSnap.data().status || 'Active';
+        
+        const updatedData = {
+          Fname: inputs[0].value,
+          Lname: inputs[1].value,
+          email: inputs[2].value,
+          gender: genderSelect.value,
+          dateofbirth: inputs[3].value,
+          status: currentStatus // Preserve the current status
+        };
+
+        // Check if email exists
+        const exists = await emailExists(updatedData.email, userId);
+        if (exists) {
+          alert('Error: Email already exists!');
+          return;
+        }
+
+        try {
+          await setDoc(doc(db, 'User', userId), updatedData, { merge: true });
+          
+          // Update the row with all fields including status
+          row.innerHTML = `
+            <td>${updatedData.Fname}</td>
+            <td>${updatedData.Lname}</td>
+            <td>${updatedData.email}</td>
+            <td>${updatedData.gender}</td>
+            <td>${updatedData.dateofbirth}</td>
+            <td>${calculateAge(updatedData.dateofbirth)}</td>
+            <td>${updatedData.status}</td>
+            <td>
+              <button class="edit-btn" onclick="editUser('${userId}')">Edit</button>
+              <button class="delete-btn" onclick="deleteUser('${userId}')">Delete</button>
+              <button class="chat-btn" onclick="openChat('${userId}', '${updatedData.email}')">Chat</button>
+              <button class="${updatedData.status === 'Banned' ? 'unban-btn' : 'ban-btn'}" onclick="banUser('${userId}', '${updatedData.status}')">
+                ${updatedData.status === 'Banned' ? 'Unban' : 'Ban'}
+              </button>
+            </td>
+          `;
+          
+          alert('User updated successfully');
+        } catch (error) {
+          console.error('Error updating user: ', error);
+          alert('Error updating user.');
+        }
+      }
+
+      // Function to fetch and display all users
+      async function fetchUsers() {
+        try {
+          const userTable = document.getElementById('userTable');
+          userTable.innerHTML = ''; // Clear table before populating
+
+          const querySnapshot = await getDocs(collection(db, 'User'));
+          querySnapshot.forEach((doc) => {
+            const userData = doc.data();
+            const tr = document.createElement('tr');
+
+            // Determine ban button text and style
+            const banButtonText = userData.status === 'Banned' ? 'Unban' : 'Ban';
+            const banButtonClass = userData.status === 'Banned' ? 'unban-btn' : 'ban-btn';
+
+            tr.innerHTML = `
+              <td>${userData.Fname || 'Unnamed'}</td>
+              <td>${userData.Lname || 'Unnamed'}</td>
+              <td>${userData.email || 'No Email'}</td>
+              <td>${userData.gender || 'Not Specified'}</td>
+              <td>${userData.dateofbirth || 'No Date'}</td>
+              <td>${userData.dateofbirth ? calculateAge(userData.dateofbirth) : 'N/A'}</td>
+              <td>${userData.status || 'Active'}</td>
+              <td>
+                <button class="edit-btn" onclick="editUser('${doc.id}')">Edit</button>
+                <button class="delete-btn" onclick="deleteUser('${doc.id}')">Delete</button>
+                <button class="chat-btn" onclick="openChat('${doc.id}', '${userData.email}')">Chat</button>
+                <button class="${banButtonClass}" onclick="banUser('${doc.id}', '${userData.status || 'Active'}')">${banButtonText}</button> 
+              </td>
+            `;
+
+            userTable.appendChild(tr);
+          });
+        } catch (error) {
+          console.error("Error fetching users: ", error);
+        }
+      }
+
+      // Call fetchUsers on page load
+      fetchUsers();
+
+      function openChat(userId, email) {
+        // Get the logged in user's email
+        const loggedInEmail = localStorage.getItem("loggedInEmail");
+        
+        // Check if trying to chat with self
+        if (email === loggedInEmail) {
+          alert("You cannot chat with yourself");
+          return;
+        }
+        
+        // If not chatting with self, proceed with chat
+        sessionStorage.setItem("chatWithEmail", email);
+        window.location.href = "chat.html";
+      }
+
+      // Expose the function globally
+      window.openChat = openChat;
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="icon" href="logo.png" type="image/png">
+
+        <!-- boxicons -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+            integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMn4l1I1jT5fF3s2z3Uq7nO1/4t4p60bTp40gK" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+        <!-- font sarabun -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+            rel="stylesheet">
+        <!-- boostrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- font kanit -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+            rel="stylesheet">
+        <!-- custom css -->
+        <!-- <link rel="stylesheet" href="css\index.css"> -->
+        <!-- Arimo font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+            rel="stylesheet">
+        <!-- boxicon -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!-- vtfont -->
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="./style.css"> -->
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+
+            @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Limelight&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+            * {
+                font-family: "Arimo", sans-serif;
+                font-weight: 600;
+            }
+
+            .border-black {
+                border: 1px solid black;
+            }
+
+            .navbar-brand p {
+                transform: translateY(20%);
+            }
+
+            .brand-search-log {
+                height: 12vh;
+            }
+
+            .logo-left img {
+                /* width: 15%; */
+                max-width: 5rem;
+                margin-left: 1rem;
+                width: 100%;
+            }
+
+            .margin-right-3rem {
+                margin-right: 3rem;
+            }
+
+            .background-header {
+                height: 35vh;
+                border-radius: 2rem;
+            }
+
+            .background-header img {
+                /* width: 100%;
+                    height: 40rem; */
+            }
+
+            .edit-btn {
+                display: none;
+            }
+
+            /* Ensure the container is the positioning context */
+            .bg-image {
+                position: relative;
+                height: 35vh;
+                /* Adjust height as needed */
+                background-size: cover;
+                /* Ensures the image covers the container */
+                background-position: center;
+                /* Centers the image */
+                background-repeat: no-repeat;
+                /* Prevents tiling if the image is small */
+                transition: opacity 1s ease-in-out;
+                opacity: 0;
+            }
+
+            .bg-image.visible {
+                opacity: 1;
+            }
+
+            /* Center arrows vertically within the image */
+            .carousel-control-prev,
+            .carousel-control-next {
+                position: absolute;
+                top: 50%;
+                /* Center vertically within the image */
+                transform: translateY(-50%);
+                width: auto;
+                background-color: transparent;
+                z-index: 1;
+            }
+
+            /* Position left and right arrows within the image boundaries */
+            .carousel-control-prev {
+                left: 10px;
+                /* Adjust distance from the left edge of the image */
+            }
+
+            .carousel-control-next {
+                right: 10px;
+                /* Adjust distance from the right edge of the image */
+            }
+
+            /* Set clickable area to the icons */
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                background-color: black;
+                /* Icon color */
+                border-radius: 50%;
+                padding: 10px;
+                /* Increase clickable area */
+                background-size: 50%;
+                /* Adjust icon size */
+                cursor: pointer;
+            }
+
+            .background-header-container {
+                padding: 2rem 5rem 2rem 5rem;
+            }
+
+            .bg-gray {
+                background-color: #F0F0F0;
+            }
+
+            .bg-search {
+                background-color: #D9D9D9;
+                border: 0;
+
+            }
+
+            .description {
+                word-wrap: break-word;
+                /* ตัดคำเมื่อถึงจุดที่ความกว้างเกิน */
+                white-space: pre-wrap;
+                /* รองรับการตัดบรรทัดใหม่ */
+                max-width: 30rem;
+                /* กำหนดความกว้างสูงสุด */
+            }
+
+            .countdown {
+                color: red;
+            }
+
+        
+            .modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 400px;
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            .close-btn {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .close-btn:hover,
+            .close-btn:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                padding-top: 100px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            .modal-content {
+                background-color: #fff;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 400px;
+                border-radius: 8px;
+            }
+
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .report-modal {
+                display: none;
+                position: fixed;
+                z-index: 1001;
+                padding-top: 100px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+
+            .report-modal-content {
+                background-color: #fff;
+                margin: auto;
+                padding: 20px;
+                border-radius: 8px;
+                width: 80%;
+                max-width: 400px;
+                text-align: center;
+            }
+
+            .report-modal h3 {
+                margin-bottom: 20px;
+            }
+
+            .report-option {
+                display: block;
+                margin: 10px 0;
+                padding: 10px 20px;
+                background-color: #FF4C4C;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                width: 100%;
+            }
+
+            .report-option:hover {
+                background-color: #FF3333;
+            }
+
+            .report-modal textarea {
+                width: 100%;
+                height: 80px;
+                margin-top: 15px;
+                border-radius: 5px;
+                padding: 10px;
+                resize: none;
+                border: 1px solid #ddd;
+            }
+
+            .submit-report-btn {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                margin-top: 15px;
+                transition: background-color 0.3s ease;
+            }
+
+            .submit-report-btn:hover {
+                background-color: #45a049;
+            }
+
+            /* Modal background */
+            .modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+
+            /* Modal content box */
+            .modal-content {
+                background-color: #ffffff;
+                margin: 10% auto;
+                padding: 20px;
+                width: 80%;
+                max-width: 400px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                text-align: center;
+            }
+
+            /* Close button */
+            .modal-content .close {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                color: #aaa;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .modal-content .close:hover {
+                color: #000;
+            }
+
+            /* Modal form title */
+            .modal-content h3 {
+                margin-bottom: 15px;
+                font-size: 20px;
+                color: #333;
+            }
+
+            /* Input fields styling */
+            .modal-content label {
+                font-size: 14px;
+                color: #333;
+                display: block;
+                text-align: left;
+                margin-top: 10px;
+                font-weight: 500;
+            }
+
+
+
+            .modal-content input[type="text"],
+            .modal-content textarea {
+                width: 100%;
+                padding: 10px;
+                margin-top: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 15px;
+                resize: none;
+                outline: none;
+                transition: border-color 0.3s ease;
+            }
+
+            .modal-content input[type="text"]:focus,
+            .modal-content textarea:focus {
+                border-color: #4CAF50;
+            }
+
+            /* Save button */
+            .modal-content button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                margin-top: 15px;
+                width: 100%;
+                transition: background-color 0.3s ease;
+            }
+
+            .modal-content button:hover {
+                background-color: #45a049;
+            }
+
+            /* Dropdown styling for select input */
+            .modal-content select {
+                width: 100%;
+                padding: 10px;
+                margin-top: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 15px;
+                outline: none;
+                transition: border-color 0.3s ease;
+                background-color: white;
+            }
+
+            .modal-content select:focus {
+                border-color: #4CAF50;
+                box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            }
+
+            /* Style for dropdown options */
+            .modal-content select option {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .notification-banner {
+                display: none;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px;
+                text-align: center;
+                font-size: 18px;
+                z-index: 9000;
+            }
+
+            .notification-banner .close-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-weight: bold;
+                font-size: 16px;
+                margin-left: 20px;
+                cursor: pointer;
+            }
+
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .auction-img {
+                border-radius: 1rem;
+                transition: 0.7s ease;
+            }
+
+            .auction-img:hover {
+                transform: scale(1.1);
+
+            }
+
+            .logout-button {
+                white-space: nowrap;
+                width: 7rem;
+
+            }
+
+            .logo-none {
+                display: none;
+            }
+
+            .nav-ml {
+                margin-left: 4rem;
+            }
+
+            .monitor {
+                border: 2px solid #FF5A1A;
+                border-radius: 1rem;
+                background-color: #f8d7da;
+                overflow: hidden;
+                white-space: nowrap;
+                box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.3);
+            }
+
+            .monitor p {
+                font-family: "VT323", monospace;
+                /* font-size: 100px; */
+                position: relative;
+                display: inline-block;
+                animation: move 10s infinite linear;
+                color: #004085;
+                font-size: 3rem;
+            }
+
+            .display-to-flex {
+                display: flex;
+            }
+
+            #dashboard-button {
+                transition: background-color 0.3s ease;
+
+            }
+
+            #dashboard-button:hover {
+                background-color: #6c757d;
+            }
+
+
+
+            .nav-none-to-block {
+                display: none;
+            }
+
+            .auction-item .bg-gray {
+                background-color: #FFFFFF;
+                border-radius: 10px;
+                /* Adjust the radius as needed */
+                padding: 1rem;
+            
+                /* Optional: add padding for a better look */
+
+            }
+
+            .menuContainerDisplay {
+                display: none;
+            }
+
+            .display-to-none-991px {
+                display: flex;
+                min-height: 80vh;
+                /* transform: translate(20%, 1%) scaleX(110%); */
+                transform: translate(0%, 1%) scaleX(100%);
+                /* width: 35vh; */
+
+            }
+
+
+            @keyframes move {
+                0% {
+                    left: 100px;
+                }
+
+                50% {
+                    left: -100px;
+                }
+
+                100% {
+                    left: 100px;
+                }
+            }
+
+            @media(max-width:991px) {
+                .logo-none {
+                    display: flex;
+                }
+
+                .nav-ml {
+                    margin-left: 0rem;
+                }
+
+                .align-items-center .fw-bold {
+                    white-space: nowrap;
+                }
+
+                .logout-none {
+                    display: none;
+                }
+
+                .nav-none-to-block {
+                    display: block;
+                }
+
+            }
+
+            @media(max-width:746px) {
+                .menu-btn {
+                    height: 2.5rem;
+                    display: inline-block;
+                    white-space: nowrap;
+                }
+            }
+
+            @media(max-width:600px) {
+                .background-header {
+                    height: 30vh;
+                }
+            }
+
+            @media(max-width:498px) {
+                .background-header {
+                    height: 25vh;
+                }
+            }
+
+            @media(max-width:400px) {
+                .background-header {
+                    height: 20vh;
+                }
+            }
+
+            .border-radius-dot7rem {
+                border-radius: 0.7rem;
+            }
+
+            @media(max-width:991px) {
+                .display-to-none-991px {
+                    display: none;
+                }
+
+                .menuContainerDisplay {
+                    display: flex;
+                }
+            }
+
+            .nav-item a,
+            .hamberger-log-out {
+                font-size: 1.2rem;
+            }
+
+            /* .no-auc{
+                transform: translateX(-50%);
+            } */
+
+            .star {
+                width: 6vmin;
+                height: 6vmin;
+                background-color: gold;
+                clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+                position: relative;
+                transform: translateX(100em) rotate(0deg);
+                animation: starMove 4s ease-out infinite;
+            }
+
+            @keyframes starMove {
+                0% {
+                    transform: translateX(30em) rotate(0deg);
+                }
+
+                100% {
+                    transform: translateX(-35em) rotate(360deg);
+                }
+            }
+
+            .brand-search-log {
+                /* min-height: 100vh; */
+                display: grid;
+                place-items: center;
+
+                --bkg: #5eb3fd;
+                --white: white;
+
+                background-color: var(--white);
+                background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+            }
+
+            .ticon {
+                /* width: 100%; */
+                height: 100%;
+                display: grid;
+                place-items: center;
+                overflow: hidden;
+            }
+
+            .title {
+                position: absolute;
+                /* top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%); */
+            }
+
+            .title h1 {
+                font-size: 2.4rem;
+                font-weight: 900;
+                font-family: "Limelight", sans-serif;
+                color: black;
+            }
+
+            p1 {
+                margin-left: 12px;
+                font-weight: 900;
+                color: black;
+            }
+
+            @media(max-width:510px) {
+                .title h1 {
+                    font-size: 1.9rem;
+                }
+            }
+
+            @media(max-width:455px) {
+                .title h1 {
+                    font-size: 1.5rem;
+                }
+            }
+
+            @media(max-width:349px) {
+                .title h1 {
+                    font-size: 1.2rem;
+                }
+            }
+
+            @keyframes ghostMove {
+                0% {
+                    transform: translateX(30em) rotateZ(-90deg);
+                }
+
+                100% {
+                    transform: translateX(-35em) rotateZ(-90deg);
+                }
+            }
+
+            @media(min-width:992px) {
+
+                /* pc */
+                .bg-pc-black {
+                    background-color: black;
+                }
+
+                .text-pc-white {
+                    color: white;
+                }
+
+                .text-pc-white:hover {
+                    color: rgb(183 183 183);
+                }
+
+                .navbar-nav .nav-link.active {
+                    color: rgb(183 183 183);
+                }
+
+
+            }
+
+            @media(max-width:991px) {
+
+                /* mobile */
+                .bg-mobile-white {
+                    background-color: white;
+                }
+
+
+            }
+
+            .rounded-end-pill {
+                border-top-right-radius: 15px;
+                /* มุมขวาบน */
+                border-bottom-right-radius: 15px;
+                /* มุมขวาล่าง */
+            }
+
+            .search-header {
+                display: flex;
+                align-items: center;
+
+
+                position: relative;
+            }
+
+            #toggleSearch {
+                position: absolute;
+                color: #888;
+                /* สีเทา */
+                right: 85px;
+                top: 58%;
+                /* transform: translateY(-50%); */
+                margin: 0 10px;
+                /* สีไอคอน Facebook */
+                font-size: 25px;
+                ;
+            }
+
+            .search-header .divider {
+                position: absolute;
+                width: 3px;
+                height: 34px;
+                background-color: #ccc;
+                margin: 0 10px;
+                right: 120px;
+                /* font-size: 1.5rem; */
+            }
+
+            .search-header {
+                display: none;
+            }
+
+            #back-to-top {
+                width: 50px;
+                height: 50px;
+                background-color: #708090;
+                color: white;
+                font-size: 18px;
+                border: none;
+                outline: none;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                transition: opacity 0.3s ease;
+            }
+
+            #back-to-top:hover {
+                background-color: #778899;
+            }
+
+            @media(max-width:991px) {
+                .search-header {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+            @media(min-width:992px){
+                .auction-padding-992px{
+                    padding: 0 3rem 0 3rem;
+                }
+            }
+            .white-space-nowrap{
+                white-space: nowrap;
+            }
+            
+        </style>
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+            import { getFirestore, collection, query, where, getDocs, doc, setDoc, addDoc, onSnapshot, getDoc, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyBHqagE_76AF0f8bRg-9Mx_QF0GtEaTya8",
+                authDomain: "gho-project.firebaseapp.com",
+                projectId: "gho-project",
+                storageBucket: "gho-project.firebasestorage.app",
+                messagingSenderId: "217715167340",
+                appId: "1:217715167340:web:c68f10020c6c33d476c849"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+
+            async function loadBackgroundImages() {
+                const q = query(collection(db, "News"), orderBy("createdAt", "desc"), limit(3));
+                const images = [];
+                const bgImageElement = document.querySelector('.bg-image');
+                let currentImageIndex = 0;
+                let autoSlideInterval;
+                const defaultImageUrl = "grid-test.png"; // URL ของภาพ default
+
+                try {
+                    const querySnapshot = await getDocs(q);
+                    querySnapshot.forEach((doc) => {
+                        images.push(doc.data().imageUrl);
+                    });
+
+                    // ถ้าไม่มีรูป ให้ใช้ภาพ default
+                    if (images.length === 0) {
+                        images.push(defaultImageUrl);
+                    }
+
+                    if (images.length > 0) {
+                        function updateBackgroundImage(index) {
+                            bgImageElement.classList.remove('visible'); // เริ่มต้นให้เป็นโปร่งใส
+                            setTimeout(() => {
+                                bgImageElement.style.backgroundImage = `url('${images[index]}')`;
+                                bgImageElement.classList.add('visible'); // เพิ่มคลาส visible เมื่อเปลี่ยนภาพเสร็จ
+                            }, 1000); // รอให้โปร่งใสก่อนเปลี่ยนภาพ
+                        }
+
+                        function startAutoSlide() {
+                            autoSlideInterval = setInterval(() => {
+                                currentImageIndex = (currentImageIndex + 1) % images.length;
+                                updateBackgroundImage(currentImageIndex);
+                            }, 5000); // 5000 ms = 5 seconds
+                        }
+
+                        updateBackgroundImage(currentImageIndex); // เริ่มต้นภาพแรก
+                        startAutoSlide();
+
+                        document.querySelector('.carousel-control-next').addEventListener('click', () => {
+                            clearInterval(autoSlideInterval);
+                            currentImageIndex = (currentImageIndex + 1) % images.length;
+                            updateBackgroundImage(currentImageIndex);
+                            startAutoSlide();
+                        });
+
+                        document.querySelector('.carousel-control-prev').addEventListener('click', () => {
+                            clearInterval(autoSlideInterval);
+                            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                            updateBackgroundImage(currentImageIndex);
+                            startAutoSlide();
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error fetching images:", error);
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", loadBackgroundImages);
+
+            async function loadProfile(email) {
+                const q = query(collection(db, "User"), where("email", "==", email));
+                try {
+                    const querySnapshot = await getDocs(q);
+                    if (!querySnapshot.empty) {
+                        querySnapshot.forEach((doc) => {
+                            const userData = doc.data();
+                            document.getElementById("profile-name").textContent = `${userData.Fname} ${userData.Lname}`;
+                            document.getElementById("profile-email").textContent = `Email: ${userData.email}`;
+                            document.getElementById("profile-dob").textContent = `Date of Birth: ${userData.dateofbirth}`;
+                        });
+                    } else {
+                        alert("No profile found for this email.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching user data: ", error);
+                    alert("An error occurred while fetching profile data.");
+                }
+            }
+            let allAuctions = []; // Store all auction data for filtering
+
+            async function loadAuctionData() {
+                const q = query(collection(db, "Auction"));
+
+                try {
+                    const querySnapshot = await getDocs(q);
+                    const now = new Date().getTime();
+                    
+                    // Filter and map auctions in one pass, with null checks
+                    allAuctions = querySnapshot.docs
+                        .map((doc) => {
+                            try {
+                                const data = doc.data();
+                                if (!data) return null;
+
+                                const auctionData = { id: doc.id, ...data };
+                                
+                                // Ensure createdAt exists and is valid
+                                if (!auctionData.createdAt || !auctionData.createdAt.seconds) {
+                                    console.warn(`Invalid createdAt for auction ${doc.id}`);
+                                    return null;
+                                }
+
+                                // Ensure auctionDuration exists and is valid
+                                if (!auctionData.auctionDuration) {
+                                    console.warn(`Invalid auctionDuration for auction ${doc.id}`);
+                                    return null;
+                                }
+
+                                const createdAt = new Date(auctionData.createdAt.seconds * 1000);
+                                const auctionDurationInSeconds =
+                                    (auctionData.auctionDuration.hours || 0) * 3600 +
+                                    (auctionData.auctionDuration.minutes || 0) * 60 +
+                                    (auctionData.auctionDuration.seconds || 0);
+                                
+                                const endTime = createdAt.getTime() + auctionDurationInSeconds * 1000;
+                                auctionData.remainingTime = Math.max(0, Math.floor((endTime - now) / 1000));
+                                return auctionData;
+                            } catch (error) {
+                                console.error(`Error processing auction ${doc.id}:`, error);
+                                return null;
+                            }
+                        })
+                        .filter(auction => auction !== null); // Remove any null entries
+
+                    console.log("Auctions loaded:", allAuctions);
+                    filterArtworks('All'); // Initial display of all auctions
+                } catch (error) {
+                    console.error("Error fetching auction data:", error);
+                    alert("An error occurred while fetching auction data.");
+                }
+            }
+
+            function formatNumber(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            async function displayAuctions(auctions, isEndedAuctions = false) {
+                const auctionContainer = document.getElementById("auction-list");
+                if (!auctionContainer) {
+                    console.error("Auction container not found");
+                    return;
+                }
+
+                auctionContainer.innerHTML = "";
+
+                if (!Array.isArray(auctions) || auctions.length === 0) {
+                    auctionContainer.innerHTML = `
+                        <div class="d-flex justify-content-center">
+                            <p class="no-auc">No ${isEndedAuctions ? 'ended' : ''} auctions available.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Cleanup existing listeners
+                if (window.bidListeners) {
+                    Object.values(window.bidListeners).forEach(unsubscribe => {
+                        if (typeof unsubscribe === 'function') {
+                            unsubscribe();
+                        }
+                    });
+                    window.bidListeners = {};
+                }
+
+                for (const auctionData of auctions) {
+                    try {
+                        if (!auctionData || !auctionData.id) {
+                            console.warn("Invalid auction data encountered");
+                            continue;
+                        }
+
+                        const auctionId = auctionData.id;
+                        
+                        // Get initial highest bid
+                        const highestBid = await getHighestBid(auctionId);
+                        
+                        // Format prices with null checks
+                        const formattedStartingPrice = formatNumber(auctionData.startingPrice || 0);
+                        const formattedMinBid = formatNumber(auctionData.minBid || 0);
+                        const formattedCurrentBid = highestBid ? 
+                            formatNumber(highestBid.amount) : 
+                            formatNumber(auctionData.startingPrice || 0);
+                        const currentBidder = highestBid ? highestBid.userEmail : "No bids yet";
+
+                        // Create auction item HTML
+                        const auctionItem = document.createElement("div");
+                        auctionItem.classList.add(
+                            "auction-item", "col-12", "col-sm-6", "col-lg-4", "col-xl-4",
+                            "d-flex", "pt-3", "pb-3", "justify-content-center", "align-items-center"
+                        );
+                        auctionItem.id = `auction-${auctionId}`;
+
+                        const bidControls = isEndedAuctions ? `
+                            <div class="bid-controls text-center" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 1rem; background-color: #fafafa; border-top: 1px solid #dee2e6;">
+                                <div class="alert alert-success mb-0">
+                                    Auction Successfully Completed
+                                </div>
+                            </div>
+                        ` : `
+                            <div class="bid-controls" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 1rem; background-color: #fafafa; border-top: 1px solid #dee2e6;">
+                                <input type="text" class="form-control mb-2 rounded-lg" id="bid-input-${auctionId}" placeholder="Enter your bid (baht)" style="border-radius: 0.8rem;">
+                                <div class="d-flex gap-2">
+                                    <button class="flex-grow-1 fw-bold btn btn-success rounded-lg" style="border-radius: 0.8rem;" onclick="placeBid('${auctionId}', ${auctionData.minBid || 0}, ${auctionData.startingPrice || 0})">Bid</button>      
+                                    <button class="fw-bold btn btn-secondary rounded-lg" style="border-radius: 0.8rem;" onclick="showOptionsModal('${auctionId}')">•••</button>
+                                </div>
+                            </div>
+                        `;
+
+                        const safeArtImageUrl = auctionData.artImageUrl || 'default-image.jpg';
+                        const safeArtName = auctionData.artName || 'Untitled';
+                        const safeArtistName = auctionData.artistName || 'Unknown Artist';
+                        const safeArtType = auctionData.artType || 'Unspecified';
+                        const safeDescription = auctionData.description || 'No description available';
+
+                        auctionItem.innerHTML = `
+                            <div class="border-0 card d-flex justify-content-center pt-4 bg-gray rounded-lg" style="width: 35rem; height: 50rem; min-height: 50rem; max-height: 50rem; margin-top: -6px; position: relative; border-radius: 1rem; overflow: hidden;">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="${safeArtImageUrl}" alt="${safeArtName}" class="auction-img w-100 h-100" style="max-width: 30rem;max-height:15rem;border-radius:1rem;">
+                                </div>
+                                <div class="card-body mt-2 d-flex flex-column">
+                                    <p class="fs-5 pt-2">Art Name: ${safeArtName}</p>
+                                    <p class="card-title">Artist Name: ${safeArtistName}</p>
+                                    <p class="card-title">Artwork Type: ${safeArtType}</p>
+                                    <p class="card-title description">Description: ${safeDescription}</p>
+                                    <p class="card-title">Starting Price: ฿ ${formattedStartingPrice}</p>
+                                    <p class="card-title">Minimum Bid: ฿ ${formattedMinBid}</p>
+                                    <p class="card-title">${isEndedAuctions ? 'Final' : 'Current'} Bid: ฿ <span id="current-bid-${auctionId}">${formattedCurrentBid}</span> by <span id="current-bidder-${auctionId}">${currentBidder}</span></p>
+                                    <p class="card-title" style="color: ${isEndedAuctions ? '#28a745' : 'red'};" id="countdown-${auctionId}">
+                                        ${isEndedAuctions ? 'Auction Ended' : 'Time Left: Calculating...'}
+                                    </p>
+                                </div>
+                                ${bidControls}
+                            </div>
+                        `;
+
+                        auctionContainer.appendChild(auctionItem);
+
+                        if (!isEndedAuctions) {
+                            const endTime = new Date(Date.now() + (auctionData.remainingTime * 1000));
+                            startCountdown(endTime, `countdown-${auctionId}`, `auction-${auctionId}`, auctionId);
+                            listenToBids(auctionId);
+                        }
+                    } catch (error) {
+                        console.error(`Error displaying auction ${auctionData?.id}:`, error);
+                        continue;
+                    }
+                }
+            }
+
+            window.filterArtworks = function (type) {
+                console.log("Filter type selected:", type);
+                
+                if (!Array.isArray(allAuctions)) {
+                    console.error("allAuctions is not properly initialized");
+                    return;
+                }
+
+                const userEmail = localStorage.getItem("loggedInEmail");
+                let filteredAuctions = [];
+
+                try {
+                    switch (type) {
+                        case 'All':
+                            filteredAuctions = allAuctions.filter(auction => 
+                                auction && auction.remainingTime > 0
+                            );
+                            break;
+                        case 'EndAuction':
+                            filteredAuctions = allAuctions.filter(auction => 
+                                auction && auction.remainingTime <= 0
+                            );
+                            break;
+                        case 'MyAuction':
+                            if (userEmail) {
+                                filteredAuctions = allAuctions.filter(auction => 
+                                    auction && 
+                                    auction.createdBy === userEmail && 
+                                    auction.remainingTime > 0  // Only show active auctions
+                                );
+                            }
+                            break;
+                        default:
+                            filteredAuctions = allAuctions.filter(auction => 
+                                auction && 
+                                auction.artType === type && 
+                                auction.remainingTime > 0
+                            );
+                    }
+
+                    displayAuctions(filteredAuctions, type === 'EndAuction');
+                } catch (error) {
+                    console.error("Error in filterArtworks:", error);
+                    alert("An error occurred while filtering auctions.");
+                }
+            };
+
+            // Add these functions to handle the options modal:
+            window.showOptionsModal = function(auctionId) {
+                let modal = document.getElementById("options-modal");
+                if (!modal) {
+                    const modalHTML = `
+                        <div id="options-modal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+                            <div class="modal-content" style="background-color: #ffffff; margin: 10% auto; padding: 20px; width: 90%; max-width: 400px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                                
+                                <!-- Header Section -->
+                                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; margin-bottom: 10px;">
+                                    <h5 style="margin: 0; font-size: 20px; color: #333333; font-weight: bold; display: flex; align-items: center;">
+                                        <span style="margin-right: 10px;">⚙️</span> Options
+                                    </h5>
+                                    <button onclick="closeOptionsModal()" style="all: unset; font-size: 22px; cursor: pointer; color: #666; position: absolute; top: 15px; right: 15px;">×</button>
+                                </div>                             
+                                <button onclick="handleChatWithOwner('${auctionId}')" style="width: 100%; padding: 9px; background-color: #4e6cef; color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; margin-top: 0px; margin-bottom: 10px;">
+                                    <span style="margin-right: 8px; font-size: 18px;">💬</span> Chat with Owner
+                                </button>
+                                <button onclick="handleReportAuction()" style="width: 100%; padding: 9px; background-color: #e84e40; color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; margin-top: 5px;">
+                                    <span style="margin-right: 8px; font-size: 18px;">🚨</span> Report Auction
+                                </button>
+                            </div>
+                        </div>`;
+                    document.body.insertAdjacentHTML("beforeend", modalHTML);
+                    modal = document.getElementById("options-modal");
+                }
+
+                localStorage.setItem("tempAuctionId", auctionId);
+                modal.style.display = "block";
+            };
+
+            // Function to handle chat with owner
+            window.handleChatWithOwner = async function(auctionId) {
+                try {
+                    // Get logged in user email
+                    const currentUserEmail = localStorage.getItem("loggedInEmail");
+                    if (!currentUserEmail) {
+                        alert("Please log in to chat with the owner");
+                        window.location.href = "login.html";
+                        return;
+                    }
+
+                    // Get auction details to find the owner
+                    const auctionRef = doc(db, "Auction", auctionId);
+                    const auctionDoc = await getDoc(auctionRef);
+                    
+                    if (!auctionDoc.exists()) {
+                        alert("Auction not found");
+                        return;
+                    }
+
+                    const ownerEmail = auctionDoc.data().createdBy;
+                    
+                    // Don't create chat if user is the owner
+                    if (currentUserEmail === ownerEmail) {
+                        alert("You cannot chat with yourself as you are the owner of this auction");
+                        closeOptionsModal();
+                        return;
+                    }
+
+                    // Create a unique chat ID combining both emails
+                    const chatId = [currentUserEmail, ownerEmail].sort().join("_");
+
+                    // Check if chat already exists
+                    const chatRef = doc(db, "chats", chatId);
+                    const chatDoc = await getDoc(chatRef);
+
+                    if (!chatDoc.exists()) {
+                        // Create new chat document without any initial message
+                        await setDoc(chatRef, {
+                            createdAt: new Date(),
+                            participants: [currentUserEmail, ownerEmail]
+                        });
+                    }
+
+                    // Store the owner's email in sessionStorage to auto-load the chat
+                    sessionStorage.setItem("chatWithEmail", ownerEmail);
+                    
+                    // Redirect to chat page
+                    window.location.href = "chat.html";
+
+                } catch (error) {
+                    console.error("Error starting chat:", error);
+                    alert("Failed to start chat. Please try again.");
+                }
+            };
+
+            window.closeOptionsModal = function() {
+                const modal = document.getElementById('options-modal');
+                if (modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            window.handleReportAuction = function() {
+                const auctionId = localStorage.getItem("tempAuctionId");
+                closeOptionsModal();
+                reportAuction(auctionId);
+                localStorage.removeItem("tempAuctionId");
+            }
+
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('options-modal');
+                if (event.target == modal) {
+                    closeOptionsModal();
+                }
+            }
+
+            // Real-time listener for bid updates
+            function listenToBids(auctionId) {
+                const bidsRef = collection(db, "Auction", auctionId, "bids");
+                const q = query(bidsRef, orderBy("bidAmount", "desc"), limit(1));
+                
+                const unsubscribe = onSnapshot(q, (snapshot) => {
+                    if (!snapshot.empty) {
+                        const highestBid = snapshot.docs[0].data();
+                        const currentBidElement = document.getElementById(`current-bid-${auctionId}`);
+                        const currentBidderElement = document.getElementById(`current-bidder-${auctionId}`);
+                        
+                        if (currentBidElement && currentBidderElement) {
+                            currentBidElement.textContent = formatNumber(highestBid.bidAmount);
+                            currentBidderElement.textContent = highestBid.userEmail;
+                        }
+                    }
+                });
+
+                // Store unsubscribe function for cleanup
+                window.bidListeners = window.bidListeners || {};
+                window.bidListeners[auctionId] = unsubscribe;
+            }
+
+            // Function to get highest bid for an auction
+            async function getHighestBid(auctionId) {
+                try {
+                    const bidsRef = collection(db, "Auction", auctionId, "bids");
+                    const q = query(bidsRef, orderBy("bidAmount", "desc"), limit(1));
+                    const querySnapshot = await getDocs(q);
+                    
+                    if (!querySnapshot.empty) {
+                        const highestBid = querySnapshot.docs[0].data();
+                        return {
+                            amount: highestBid.bidAmount,
+                            userEmail: highestBid.userEmail
+                        };
+                    }
+                    return null;
+                } catch (error) {
+                    console.error("Error getting highest bid:", error);
+                    return null;
+                }
+            }
+
+            // ฟังก์ชันเปิด Modal
+            // window.openEditModal = function (auctionId) {
+            //     currentAuctionId = auctionId;
+            //     document.getElementById("edit-modal").style.display = "block";
+            // }
+
+            // // ฟังก์ชันปิด Modal
+            // window.closeEditModal = function () {
+            //     currentAuctionId = null;
+            //     document.getElementById("edit-modal").style.display = "none";
+            // }
+
+            // ฟังก์ชันบันทึกการแก้ไข
+            // window.submitEdit = async function () {
+            //     const artName = document.getElementById("edit-artName").value.trim();
+            //     const artType = document.getElementById("edit-artType").value.trim();
+            //     const artistName = document.getElementById("edit-artistName").value.trim();
+            //     const description = document.getElementById("edit-description").value.trim();
+
+            //     // ตรวจสอบว่าฟิลด์ทุกฟิลด์ไม่ว่าง
+            //     if (!artName || !artType || !artistName || !description) {
+            //         alert("Please fill out all fields.");
+            //         return;
+            //     }
+
+            //     const updatedData = {
+            //         artName: artName,
+            //         artType: artType,
+            //         artistName: artistName,
+            //         description: description
+            //     };
+
+            //     try {
+            //         const auctionRef = doc(db, "Auction", currentAuctionId);
+            //         await setDoc(auctionRef, updatedData, { merge: true });
+
+            //         alert("Auction updated successfully!");
+            //         closeEditModal();
+            //         loadAuctionData(); // โหลดข้อมูลการประมูลใหม่เพื่อแสดงการอัปเดต
+            //     } catch (error) {
+            //         console.error("Error updating auction: ", error);
+            //         alert("Failed to update auction. Please try again.");
+            //     }
+            // }
+
+            function startCountdown(endTime, countdownId, auctionId, auctionDocId) {
+                const countdownInterval = setInterval(async () => {
+                    const now = new Date().getTime();
+                    const distance = endTime - now;
+
+                    // Calculate days first
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    // Convert days to hours and add remaining hours
+                    const totalHours = (days * 24) + Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Display total hours instead of just remainder
+                    document.getElementById(countdownId).textContent = `Time Left: ${totalHours}h ${minutes}m ${seconds}s`;
+
+                    if (distance < 0) {
+                        clearInterval(countdownInterval);
+                        document.getElementById(countdownId).textContent = "Auction Ended";
+
+                        const auctionElement = document.getElementById(auctionId);
+                        if (auctionElement) {
+                            auctionElement.remove();
+                        }
+
+                        if (!localStorage.getItem(`winningBidSaved_${auctionDocId}`)) {
+                            await saveWinningBid(auctionDocId);
+                            localStorage.setItem(`winningBidSaved_${auctionDocId}`, "true");
+                        }
+                    }
+                }, 1000);
+            }
+
+            window.reportAuction = function (auctionId) {
+                const userEmail = localStorage.getItem("loggedInEmail");
+
+                if (!userEmail) {
+                    alert("You must be logged in to report an auction.");
+                    window.location.href = "login.html"; // นำไปยังหน้าเข้าสู่ระบบ
+                    return;
+                }
+
+                document.getElementById("report-modal").style.display = "block";
+                localStorage.setItem("currentAuctionId", auctionId);
+            };
+
+            window.closeReportModal = function () {
+                const modal = document.getElementById("report-modal");
+                modal.style.display = "none";
+                // Clear the additional comments field and uncheck radio buttons for a clean slate
+                document.getElementById("additional-comments").value = "";
+                document.querySelectorAll('input[name="reportReason"]').forEach((input) => input.checked = false);
+            };
+
+
+            window.submitReport = async function () {
+                const auctionId = localStorage.getItem("currentAuctionId");
+                const userEmail = localStorage.getItem("loggedInEmail");
+                const additionalComments = document.getElementById("additional-comments").value;
+                const selectedReason = document.querySelector('input[name="reportReason"]:checked');
+
+                if (!selectedReason) {
+                    alert("Please select a reason for reporting.");
+                    return;
+                }
+
+                const reportData = {
+                    auctionId: auctionId,
+                    reportedBy: userEmail,
+                    reason: selectedReason.value,
+                    additionalComments: additionalComments,
+                    timestamp: new Date()
+                };
+
+                try {
+                    await addDoc(collection(db, "Reports"), reportData);
+                    alert("Report submitted successfully!");
+                    closeReportModal();
+                } catch (error) {
+                    console.error("Error submitting report:", error);
+                    alert("Failed to submit report. Please try again.");
+                }
+            }
+
+            async function saveWinningBid(auctionId) {
+                try {
+                    const auctionRef = doc(db, "Auction", auctionId);
+                    const auctionDoc = await getDoc(auctionRef);
+
+                    if (!auctionDoc.exists()) {
+                        console.error(`Auction with ID ${auctionId} not found.`);
+                        return;
+                    }
+
+                    const auctionCreator = auctionDoc.data().createdBy;
+                    const artName = auctionDoc.data().artName;
+
+                    const bidsRef = collection(db, "Auction", auctionId, "bids");
+                    const snapshot = await getDocs(bidsRef);
+
+                    let highestBid = 0;
+                    let highestBidder = null;
+
+                    snapshot.forEach((doc) => {
+                        const bidData = doc.data();
+                        if (bidData.bidAmount > highestBid) {
+                            highestBid = bidData.bidAmount;
+                            highestBidder = bidData.userEmail;
+                        }
+                    });
+
+                    if (!highestBidder) {
+                        console.log("No valid highest bidder found.");
+                        return;
+                    }
+
+                    // Save the winning bid under 'Bidwin' using 'auctionId' as the document ID
+                    const bidwinRef = doc(db, "Bidwin", auctionId);
+                    await setDoc(bidwinRef, {
+                        AuctionID: auctionId,
+                        email: highestBidder,
+                        bidAmount: highestBid
+                    });
+
+                    console.log("Winning bid saved successfully!");
+
+                    showNotificationToUser(`Congratulations! You won the auction for "${artName}".`, highestBidder);
+                    showNotificationToUser(`Your auction for "${artName}" has ended, and a winner has been selected.`, auctionCreator);
+
+                } catch (error) {
+                    console.error("Error saving winning bid:", error);
+                }
+            }
+
+            // Function to show a notification only to a specific user
+            function showNotificationToUser(message, targetEmail) {
+                const loggedInEmail = localStorage.getItem("loggedInEmail");
+
+                console.log(`Target email: ${targetEmail}, Logged-in email: ${loggedInEmail}`); // Debugging email match
+
+                // Show notification only if the logged-in user is the target user
+                if (loggedInEmail === targetEmail) {
+                    displayNotification(message);
+                }
+            }
+
+            // Function to display the notification banner with a message
+            function displayNotification(message) {
+                document.getElementById("notification-message").textContent = message;
+                document.getElementById("notification-banner").style.display = "block";
+
+                // Hide the notification after 3 seconds
+                setTimeout(() => {
+                    document.getElementById("notification-banner").style.display = "none";
+                }, 3000); // 3000 milliseconds = 3 seconds
+            }
+
+            // Function to close the notification banner manually
+            function closeNotification() {
+                document.getElementById("notification-banner").style.display = "none";
+            }
+
+            // Place bid function with "Bid by" update
+            async function getUserAge(userEmail) {
+                try {
+                    const userRef = collection(db, "User");
+                    const q = query(userRef, where("email", "==", userEmail));
+                    const querySnapshot = await getDocs(q);
+
+                    if (querySnapshot.empty) {
+                        throw new Error("User profile not found.");
+                    }
+
+                    let age = null;
+                    querySnapshot.forEach((doc) => {
+                        const userData = doc.data();
+                        const dateOfBirth = new Date(userData.dateofbirth); // Convert dateofbirth string to Date object
+                        const today = new Date();
+                        age = today.getFullYear() - dateOfBirth.getFullYear();
+                        const monthDiff = today.getMonth() - dateOfBirth.getMonth();
+
+                        // Adjust age if the birthday hasn't occurred yet this year
+                        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dateOfBirth.getDate())) {
+                            age--;
+                        }
+                    });
+
+                    return age;
+                } catch (error) {
+                    console.error("Error fetching user age:", error);
+                    throw error;
+                }
+            }
+
+            window.placeBid = async function (auctionId, minBid, startingPrice) {
+                const bidInput = document.getElementById(`bid-input-${auctionId}`);
+                const bidAmount = parseInt(bidInput.value.replace(/,/g, ''));
+                
+                const currentBidElement = document.getElementById(`current-bid-${auctionId}`);
+                const currentBid = parseFloat(currentBidElement.textContent.replace(/,/g, ''));
+                const currentBidder = document.getElementById(`current-bidder-${auctionId}`).textContent;
+
+                // Validate if bid is a valid number
+                if (isNaN(bidAmount)) {
+                    alert("Please enter a valid bid amount.");
+                    return;
+                }
+
+                try {
+                    const userEmail = localStorage.getItem("loggedInEmail");
+
+                    if (!userEmail) {
+                        alert("You must be logged in to place a bid.");
+                        window.location.href = "login.html";
+                        return;
+                    }
+
+                    // Check if user is at least 15 years old
+                    const age = await getUserAge(userEmail);
+                    if (age < 15) {
+                        alert("You must be at least 15 years old to place a bid.");
+                        return;
+                    }
+
+                    // Check if this is the first bid
+                    if (currentBidder === "No bids yet") {
+                        if (bidAmount < startingPrice) {
+                            alert(`Your first bid must be at least equal to the starting price of ${startingPrice} baht.`);
+                            return;
+                        }
+                        if (bidAmount < (startingPrice + minBid)) {
+                            alert(`Your first bid must be at least ${minBid} baht more than the starting price.\nMinimum allowed bid: ${startingPrice + minBid} baht`);
+                            return;
+                        }
+                    } else {
+                        if (bidAmount <= currentBid) {
+                            alert(`Your bid must be higher than the current bid of ${currentBid} baht.`);
+                            return;
+                        }
+                        if (bidAmount < (currentBid + minBid)) {
+                            alert(`Your bid must be at least ${minBid} baht more than the current bid.\nMinimum allowed bid: ${currentBid + minBid} baht`);
+                            return;
+                        }
+                    }
+
+                    // Add bid to the database
+                    const bidDocRef = doc(collection(db, "Auction", auctionId, "bids"));
+                    await setDoc(bidDocRef, {
+                        AuctionID: auctionId,
+                        bidAmount: bidAmount,
+                        userEmail: userEmail
+                    });
+
+                    // Update UI to show new bid
+                    currentBidElement.textContent = formatNumber(bidAmount);
+                    const currentBidderElement = document.getElementById(`current-bidder-${auctionId}`);
+                    currentBidderElement.textContent = userEmail;
+
+                    // Clear the input field after successful bid
+                    bidInput.value = "";
+                    alert("Bid placed successfully!");
+                } catch (error) {
+                    console.error("Error placing bid:", error);
+                    alert(error.message || "An error occurred while placing your bid.");
+                }
+            };
+
+            document.addEventListener("DOMContentLoaded", loadAuctionData);
+            //   add  Active fx
+            document.querySelectorAll('.menu-btn').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    // ลบ active ออกจากปุ่มทั้งหมด
+                    document.querySelectorAll('.menu-btn').forEach(function (btn) {
+                        btn.classList.remove('active');
+                    });
+
+                    // เพิ่ม active ให้ปุ่มที่ถูกคลิก
+                    this.classList.add('active');
+                });
+            });
+
+            // ฟังก์ชันสำหรับเปิดการเลื่อนแบบอัตโนมัติ
+            function toggleScroll() {
+                const menuContainer = document.getElementById("menuContainer");
+                if (window.innerWidth < 768) { // กำหนดขนาดหน้าจอที่ต้องการ เช่น 768px
+                    menuContainer.style.overflowX = "auto";
+                } else {
+                    menuContainer.style.overflowX = "visible";
+                }
+            }
+
+            // เรียกใช้ฟังก์ชันเมื่อขนาดหน้าจอเปลี่ยนแปลง
+            window.addEventListener("resize", toggleScroll);
+
+            // เรียกใช้ฟังก์ชันเมื่อโหลดหน้าเว็บ
+            toggleScroll();
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const loggedInEmail = localStorage.getItem("loggedInEmail");
+                if (!loggedInEmail) {
+                    alert("No logged-in user.");
+                    window.location.href = "index.html"; // เปลี่ยนไปยังหน้าล็อกอิน
+                }
+            });
+
+            async function searchArtworks() {
+                const searchInputElement = document.getElementById("search-input");
+                const searchInput = searchInputElement.value.trim().toLowerCase();
+
+                if (!searchInput) {
+                    alert("Please enter a search term.");
+                    return;
+                }
+
+                try {
+                    // Reference to the Firestore collection
+                    const q = query(collection(db, "Auction"));
+                    const querySnapshot = await getDocs(q);
+
+                    // Current timestamp
+                    const now = new Date().getTime();
+
+                    // Filter results
+                    const filteredAuctions = querySnapshot.docs
+                        .map((doc) => {
+                            const auctionData = { id: doc.id, ...doc.data() };
+
+                            // Calculate remaining time
+                            const createdAt = new Date(auctionData.createdAt.seconds * 1000);
+                            const auctionDurationInSeconds =
+                                (auctionData.auctionDuration.hours * 3600) +
+                                (auctionData.auctionDuration.minutes * 60) +
+                                auctionData.auctionDuration.seconds;
+                            const endTime = createdAt.getTime() + auctionDurationInSeconds * 1000;
+
+                            auctionData.remainingTime = Math.max(0, Math.floor((endTime - now) / 1000));
+                            return auctionData;
+                        })
+                        .filter((auction) =>
+                            auction.remainingTime > 0 && // Only active auctions
+                            (auction.artName.toLowerCase().includes(searchInput) ||
+                                auction.artistName.toLowerCase().includes(searchInput) ||
+                                auction.description.toLowerCase().includes(searchInput))
+                        );
+
+                    // Display the filtered auctions
+                    displayAuctions(filteredAuctions);
+
+                    // Reset the search input
+                    searchInputElement.value = "";
+                } catch (error) {
+                    console.error("Error performing search: ", error);
+                    alert("An error occurred while searching. Please try again.");
+                }
+            }
+
+            // Add event listener to the search button
+            document.querySelector(".btn-search").addEventListener("click", searchArtworks);
+
+            // Optionally, trigger search on 'Enter' key press
+            document.getElementById("search-input").addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    searchArtworks();
+                }
+            });
+
+            async function searchArtworksInput2() {
+                const searchInputElement = document.getElementById("search-input2");
+                const searchInput = searchInputElement.value.trim().toLowerCase();
+
+                if (!searchInput) {
+                    alert("Please enter a search term.");
+                    return;
+                }
+
+                try {
+                    // Reference to the Firestore collection
+                    const q = query(collection(db, "Auction"));
+                    const querySnapshot = await getDocs(q);
+
+                    // Current timestamp
+                    const now = new Date().getTime();
+
+                    // Filter results
+                    const filteredAuctions = querySnapshot.docs
+                        .map((doc) => {
+                            const auctionData = { id: doc.id, ...doc.data() };
+
+                            // Calculate remaining time
+                            const createdAt = new Date(auctionData.createdAt.seconds * 1000);
+                            const auctionDurationInSeconds =
+                                (auctionData.auctionDuration.hours * 3600) +
+                                (auctionData.auctionDuration.minutes * 60) +
+                                auctionData.auctionDuration.seconds;
+                            const endTime = createdAt.getTime() + auctionDurationInSeconds * 1000;
+
+                            auctionData.remainingTime = Math.max(0, Math.floor((endTime - now) / 1000));
+                            return auctionData;
+                        })
+                        .filter((auction) =>
+                            auction.remainingTime > 0 && // Only active auctions
+                            (auction.artName.toLowerCase().includes(searchInput) ||
+                                auction.artistName.toLowerCase().includes(searchInput) ||
+                                auction.description.toLowerCase().includes(searchInput))
+                        );
+
+                    // Display the filtered auctions
+                    displayAuctions(filteredAuctions);
+
+                    // Reset the search input
+                    searchInputElement.value = "";
+                } catch (error) {
+                    console.error("Error performing search: ", error);
+                    alert("An error occurred while searching. Please try again.");
+                }
+            }
+
+            // Add event listener to the search button
+            document.querySelector(".btn-search2").addEventListener("click", searchArtworksInput2);
+
+            // Optionally, trigger search on 'Enter' key press
+            document.getElementById("search-input2").addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    searchArtworksInput2();
+                }
+            });       
+        </script>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light  bg-mobile-white bg-pc-black fixed-top border-black p-0">
+            <div class="container-fluid">
+                <a class="navbar-brand logo-none" href="#">
+                    <p>Gallery Hall Online</p>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse nav-ml" id="navbarNav">
+                    <ul class="navbar-nav ms-auto gap-3">
+                        <li class="nav-item ">
+                            <a class="nav-link active text-pc-white" aria-current="page" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-pc-white" href="add-auction.html">Add My Auction</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-pc-white" href="profile.html">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-pc-white" href="contact-us.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto gap-3">
+                        <li class="nav-item logout-none">
+                            <a href="chat.html" class="btn btn-outline-secondary me-2 border-0">
+                                <i class='bx bxs-chat fs-3 text-white'></i>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-none-to-block pt-2">
+
+                            <a class="nav-link" href="chat.html">Chat</a>
+
+                        </li>
+                        <li class="nav-item logo-none" onclick="logout()">
+                            <script>
+                                function logout() {
+                                    console.log("Logout button clicked");
+                                    localStorage.removeItem("loggedInEmail");
+                                    sessionStorage.removeItem("chatWithEmail");
+                                    window.location.href = "index.html";
+                                }
+                            </script>
+
+                            <p class="text-danger hamberger-log-out">Log out</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid mt-5 brand-search-log pt-4 pb-3 d-flex justify-content-between align-items-center">
+            <div class="col-2 logo-left ">
+                <img class=" img-fluid w-100" src="logo.png">
+            </div>
+            <div class="col-9 col-lg-6 d-flex  align-items-center justify-content-center  h-100 center ticon">
+                <div class="title">
+                    <h1 class=" fw-bold "> Gallery Hall Online</h1>
+                </div>
+                <div class="star">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class=" col-2 display-to-flex justify-content-end  logout-none  ">
+                <button id="dashboard-button" class="btn btn-secondary text-white rounded-pill fs-5 fw-bold"
+                    style="display: none; margin-right: 10px;"
+                    onclick="window.location.href='home2.html';">Dashboard</button>
+                <button class="  btn btn-danger text-white btn-outline-danger  rounded-pill fs-5 fw-bold logout-button"
+                    onclick="logout()">Log out</button>
+
+                <script>
+                    function logout() {
+                        sessionStorage.removeItem("chatWithEmail");
+                        console.log("Logout button clicked");
+                        localStorage.removeItem("loggedInEmail");
+                        window.location.href = "index.html";
+                    }
+
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const loggedInEmail = localStorage.getItem("loggedInEmail");
+
+                        // ADMIN LIST // ADMIN LIST // ADMIN LIST // ADMIN LIST 
+                        // ADMIN LIST // ADMIN LIST // ADMIN LIST // ADMIN LIST 
+                        // ADMIN LIST // ADMIN LIST // ADMIN LIST // ADMIN LIST 
+                        const adminEmails = ["admin@admin.com", "admin2@admin.com","admin3@admin.com"];
+                        // ADMIN LIST // ADMIN LIST // ADMIN LIST // ADMIN LIST 
+                        // ADMIN LIST // ADMIN LIST // ADMIN LIST // ADMIN LIST 
+                        // ADMIN LIST // ADMIN LIST // ADMIN LIST // ADMIN LIST 
+
+                        // Check if the logged-in email is one of the admin emails
+                        if (adminEmails.includes(loggedInEmail)) {
+                            document.getElementById("dashboard-button").style.display = "block";
+                        }
+                    });
+                </script>
+                
+            </div>
+        </div>
+        <div class="container-fluid bg-gray pt-5 pb-2 search-header gap-2">
+            <input type="text" id="search-input2"
+                class="bg-white border-0 w-75  rounded-pill  pl-3 border-black form-control" placeholder="Search Art">
+            <button class="btn btn-outline-white rounded-pill btn-search2"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="container-fluid  p-5 d-flex flex-column bg-gray">
+            <div class="bg-image background-header " onclick="openImageModal()">
+                <!-- Background image and navigation buttons -->
+                <button class="carousel-control-prev" type="button">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class=" justify-content-center menuContainerDisplay">
+                <div id="menuContainer" class=" pt-5 pb-1 gap-3 d-inline-flex flex-nowrap overflow-auto">
+                    <!-- style="overflow-x: auto; white-space: nowrap;"> -->
+                    <button class=" active menu-btn btn text-white btn-success border-radius-dot7rem fw-bold"
+                        onclick="filterArtworks('All')">All</button>
+                    <button class=" menu-btn btn text-white btn-success border-radius-dot7rem fw-bold"
+                        onclick="filterArtworks('Abstract')">Abstract</button>
+                    <button class="  menu-btn btn text-white btn-success border-radius-dot7rem fw-bold"
+                        onclick="filterArtworks('Painting')">Painting</button>
+                    <button class="  menu-btn btn text-white btn-success border-radius-dot7rem fw-bold"
+                        onclick="filterArtworks('Sculpture')">Sculpture</button>
+                    <button class="  menu-btn btn text-white btn-success border-radius-dot7rem fw-bold"
+                        onclick="filterArtworks('Other')">Other</button>
+                    <button class="menu-btn btn text-white btn-danger border-radius-dot7rem fw-bold" 
+                        onclick="filterArtworks('EndAuction')">End Auction</button>
+                    <button class=" menu-btn btn text-white btn-primary border-radius-dot7rem fw-bold"
+                        onclick="filterArtworks('MyAuction')">My Auction</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" >
+            <div class="row bg-gray auction-padding-992px" >
+                <div class="col-lg-2 display-to-none-991px pt-4 flex-column bg-white border-radius-dot7rem" style="height: 300px;">
+                    <!-- <button class="btn btn-outline-secondary border-black border-1 rounded-pill">Search by Artist</button> -->
+                    <div class="d-flex justify-content-center g-2">
+                        <input type="text" id="search-input"
+                            class="bg-gray border-0 w-100 rounded-pill pl-3 border-black form-control"
+                            placeholder="Search Art">
+                        <button class="btn btn-outline-white rounded-pill btn-search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <div id="menuContainer" class="d-flex justify-content-center flex-column mt-4 gap-3">
+                        <p1>Art Filter</p1>
+                        <button onclick="filterArtworks('All')"
+                            class="d-flex active menu-btn justify-content-start btn btn-outline-secondary text-black fw-bold border-0">┗▶
+                            All</button>
+                        <button onclick="filterArtworks('Abstract')"
+                            class="d-flex menu-btn justify-content-start btn btn-outline-secondary text-black fw-bold border-0">┗▶
+                            Abstract</button>
+                        <button onclick="filterArtworks('Painting')"
+                            class="d-flex menu-btn justify-content-start btn btn-outline-secondary text-black fw-bold border-0">┗▶
+                            Painting</button>
+                        <button onclick="filterArtworks('Sculpture')"
+                            class="d-flex menu-btn justify-content-start btn btn-outline-secondary text-black fw-bold border-0">┗▶
+                            Sculpture</button>
+                        <button onclick="filterArtworks('Other')"
+                            class="d-flex menu-btn justify-content-start btn btn-outline-secondary text-black fw-bold border-0">┗▶
+                            Other</button>
+
+                        
+                            
+                        <button onclick="filterArtworks('EndAuction')"
+                            class="d-flex menu-btn justify-content-start btn btn-outline-danger text-red fw-bold border-0">End Auction</button>
+
+                        <button onclick="filterArtworks('MyAuction')"
+                            class="d-flex menu-btn justify-content-start btn btn-outline-primary text-blue fw-bold border-0">MyAuction</button>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-lg-10 gallery-show bg-gray d-flex justify-content-center">
+                    <div class="container-fluid w-100 bg-gray auction-grid d-flex justify-content-start   row auction-list"
+                        id="auction-list">
+                    </div>
+                    <button id="back-to-top" class="btn btn-primary rounded-circle position-fixed"
+                        style="bottom: 20px; right: 20px; display: none; z-index: 1000;">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const backToTopButton = document.getElementById("back-to-top");
+
+                            // Show or hide the button based on scroll position
+                            window.addEventListener("scroll", function () {
+                                if (window.scrollY > 300) {
+                                    backToTopButton.style.display = "block";
+                                } else {
+                                    backToTopButton.style.display = "none";
+                                }
+                            });
+
+                            // Scroll to top when button is clicked
+                            backToTopButton.addEventListener("click", function () {
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior: "smooth"
+                                });
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div id="report-modal" class="report-modal">
+            <div class="report-modal-content">
+                <span onclick="closeReportModal()" class="close">&times;</span>
+                <h3>Select a reason for reporting:</h3>
+                <div class="d-flex flex-column">
+                    <label><input type="radio" name="reportReason" value="The information is not true"> The information is
+                        not
+                        true</label>
+                    <label><input type="radio" name="reportReason" value="Disrespectful picture"> Disrespectful
+                        picture</label>
+                    <label><input type="radio" name="reportReason" value="Use harsh words"> Use harsh words</label>
+                </div>
+                <textarea id="additional-comments" placeholder="Add any additional comments here..."></textarea>
+                <button class="submit-report-btn" onclick="submitReport()">Submit Report</button>
+            </div>
+        </div>
+        <div id="notification-banner" class="notification-banner">
+            <span id="notification-message"></span>
+            <button onclick="closeNotification()" class="close-btn">X</button>
+        </div>
+        <!-- boostrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
